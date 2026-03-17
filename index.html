@@ -4,12 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Autoscuola San Biagio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
     /* ── Reset & base ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
       color: #1a1a2e;
       background: #f5f7fa;
     }
@@ -370,6 +373,124 @@
       border: none;
     }
 
+    /* ── WhatsApp floating ── */
+    .wa-float {
+      position: fixed;
+      bottom: 1.8rem;
+      right: 1.8rem;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      text-decoration: none;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.25));
+      transition: transform .2s;
+    }
+    .wa-float:hover { transform: scale(1.08); }
+    .wa-float .wa-icon {
+      width: 56px; height: 56px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .wa-float .wa-icon svg { width: 30px; height: 30px; fill: #ffffff; }
+    .wa-float .wa-label {
+      background: #25d366;
+      color: #ffffff;
+      font-size: .82rem;
+      font-weight: 700;
+      padding: .4rem .85rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+    }
+    .wa-float:hover .wa-label { opacity: 1; transform: translateX(0); }
+    @media (max-width: 480px) {
+      .wa-float { bottom: 1.2rem; right: 1.2rem; }
+      .wa-float .wa-icon { width: 50px; height: 50px; }
+    }
+
+    /* ── Form contatto ── */
+    #form-contatto { background: var(--bianco); }
+    .form-wrap {
+      background: var(--grigio-ch);
+      border: 1px solid var(--grigio);
+      border-radius: 12px;
+      padding: 2.4rem;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--blu-sc);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: .65rem .9rem;
+      border: 1.5px solid var(--grigio);
+      border-radius: 6px;
+      font-size: .93rem;
+      font-family: inherit;
+      color: var(--testo);
+      background: var(--bianco);
+      transition: border-color .2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blu);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-privacy {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      margin-bottom: 1.4rem;
+      font-size: .84rem;
+      color: #5a6a7e;
+      line-height: 1.5;
+    }
+    .form-privacy input[type="checkbox"] {
+      margin-top: .18rem;
+      accent-color: var(--blu);
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+    }
+    .form-privacy a { color: var(--blu); text-decoration: underline; }
+    .form-success {
+      display: none;
+      background: #e8f5e9;
+      border: 1.5px solid #66bb6a;
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      color: #2e7d32;
+      font-size: .93rem;
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-wrap { padding: 1.4rem 1rem; }
+    }
+
     /* ── Footer ── */
     footer {
       background: #0a1628;
@@ -456,6 +577,7 @@
       <li><a href="#requisiti">Requisiti</a></li>
       <li><a href="#documenti-patente">Documenti</a></li>
       <li><a href="#orari">Orari</a></li>
+      <li><a href="#form-contatto">Scrivici</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
   </nav>
@@ -873,6 +995,63 @@
     </div>
   </section>
 
+  <!-- FORM CONTATTO -->
+  <section id="form-contatto">
+    <div class="container">
+      <h2 class="section-title">Scrivici un messaggio</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Compila il modulo e ti risponderemo entro 24 ore lavorative.</p>
+      <div class="form-wrap">
+        <div class="form-success" id="form-success">
+          &#10003; Messaggio inviato! Ti risponderemo al più presto.
+        </div>
+        <form id="contatto-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-nome">Nome <span style="color:var(--rosso)">*</span></label>
+              <input type="text" id="f-nome" name="nome" placeholder="Mario" required />
+            </div>
+            <div class="form-group">
+              <label for="f-cognome">Cognome <span style="color:var(--rosso)">*</span></label>
+              <input type="text" id="f-cognome" name="cognome" placeholder="Rossi" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="f-email">Email <span style="color:var(--rosso)">*</span></label>
+            <input type="email" id="f-email" name="email" placeholder="mario.rossi@email.it" required />
+          </div>
+          <div class="form-group">
+            <label for="f-patente">Patente di interesse</label>
+            <select id="f-patente" name="patente">
+              <option value="">— Seleziona —</option>
+              <option>Patente AM (Ciclomotore)</option>
+              <option>Patente A1 / A2 / A (Moto)</option>
+              <option>Patente B (Auto)</option>
+              <option>Patente C / CE (Autocarro)</option>
+              <option>Patente D / DE (Autobus)</option>
+              <option>Recupero punti / Revisione</option>
+              <option>Altro / Informazioni generali</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="f-messaggio">Messaggio <span style="color:var(--rosso)">*</span></label>
+            <textarea id="f-messaggio" name="messaggio" placeholder="Scrivi la tua richiesta..." required></textarea>
+          </div>
+          <div class="form-privacy">
+            <input type="checkbox" id="f-privacy" name="privacy" required />
+            <label for="f-privacy">
+              Ho letto e accetto la <a href="privacy.html" target="_blank">Privacy Policy</a>.
+              I miei dati verranno utilizzati esclusivamente per rispondere alla mia richiesta.
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;display:block;text-align:center;">
+            Invia messaggio
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTATTI -->
   <section id="contatti">
     <div class="container">
@@ -920,12 +1099,22 @@
     </div>
   </section>
 
+  <!-- WHATSAPP FLOATING -->
+  <a class="wa-float" href="https://wa.me/39037732363" target="_blank" rel="noopener" aria-label="Contattaci su WhatsApp">
+    <span class="wa-label">Scrivici su WhatsApp</span>
+    <div class="wa-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M16 2C8.268 2 2 8.268 2 16c0 2.492.648 4.831 1.782 6.86L2 30l7.338-1.762A13.93 13.93 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.54 11.54 0 0 1-5.88-1.608l-.42-.25-4.354 1.046 1.072-4.244-.274-.436A11.56 11.56 0 0 1 4.4 16C4.4 9.59 9.59 4.4 16 4.4S27.6 9.59 27.6 16 22.41 27.6 16 27.6zm6.344-8.668c-.348-.174-2.06-1.016-2.38-1.132-.32-.116-.552-.174-.784.174-.232.348-.9 1.132-1.102 1.364-.202.232-.404.26-.752.086-.348-.174-1.47-.542-2.8-1.726-1.034-.922-1.732-2.06-1.936-2.408-.202-.348-.022-.536.152-.708.156-.156.348-.406.522-.61.174-.202.232-.348.348-.58.116-.232.058-.436-.028-.61-.086-.174-.784-1.89-1.074-2.588-.282-.68-.57-.588-.784-.598l-.668-.012c-.232 0-.61.086-.928.436-.318.348-1.218 1.19-1.218 2.9s1.246 3.364 1.42 3.596c.174.232 2.452 3.744 5.942 5.252.83.358 1.478.572 1.984.732.834.264 1.592.226 2.192.138.668-.1 2.06-.842 2.35-1.656.29-.814.29-1.512.204-1.656-.086-.144-.318-.232-.666-.406z"/>
+      </svg>
+    </div>
+  </a>
+
   <!-- FOOTER -->
   <footer>
     <p><strong>Autoscuola San Biagio</strong></p>
-    <p>Via Serrati, 13 &mdash; 26845 Codogno (LO) &mdash; P.IVA 00000000000</p>
+    <p>Via Serrati, 13 &mdash; 26845 Codogno (LO) &mdash; P.IVA 10562230150</p>
     <p>Tel: <a href="tel:+39037732363">0377 32363</a> &mdash; Email: <a href="mailto:autoscuolasanbiagio@libero.it">autoscuolasanbiagio@libero.it</a></p>
-    <p style="margin-top:.8rem;font-size:.78rem;">&copy; 2026 Autoscuola San Biagio &mdash; Tutti i diritti riservati &mdash; <a href="#">Privacy Policy</a> &mdash; <a href="#">Cookie Policy</a></p>
+    <p style="margin-top:.8rem;font-size:.78rem;">&copy; 2026 Autoscuola San Biagio &mdash; Tutti i diritti riservati &mdash; <a href="privacy.html">Privacy Policy</a> &mdash; <a href="cookie.html">Cookie Policy</a></p>
   </footer>
 
   <script>
@@ -946,6 +1135,46 @@
         hamburger.setAttribute('aria-expanded', false);
       });
     });
+
+    /* ── Form contatto ── */
+    const form = document.getElementById('contatto-form');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nome     = document.getElementById('f-nome').value.trim();
+        const cognome  = document.getElementById('f-cognome').value.trim();
+        const email    = document.getElementById('f-email').value.trim();
+        const messaggio = document.getElementById('f-messaggio').value.trim();
+        const privacy  = document.getElementById('f-privacy').checked;
+
+        if (!nome || !cognome || !email || !messaggio) {
+          alert('Per favore compila tutti i campi obbligatori (*).');
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          alert('Inserisci un indirizzo email valido.');
+          return;
+        }
+        if (!privacy) {
+          alert('Devi accettare la Privacy Policy per inviare il messaggio.');
+          return;
+        }
+
+        const patente = document.getElementById('f-patente').value;
+        const subject = encodeURIComponent('Richiesta dal sito – ' + nome + ' ' + cognome);
+        const body    = encodeURIComponent(
+          'Nome: ' + nome + ' ' + cognome + '\n' +
+          'Email: ' + email + '\n' +
+          (patente ? 'Patente di interesse: ' + patente + '\n' : '') +
+          '\nMessaggio:\n' + messaggio
+        );
+        window.location.href = 'mailto:autoscuolasanbiagio@libero.it?subject=' + subject + '&body=' + body;
+
+        document.getElementById('form-success').style.display = 'block';
+        form.reset();
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
 
     /* ── Tab patenti ── */
     const tabBtns = document.querySelectorAll('.tab-btn');
