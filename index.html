@@ -71,13 +71,21 @@
       text-decoration: none;
       font-size: .92rem;
       font-weight: 500;
-      transition: color .2s;
+      display: inline-block;
+      transition: color .2s, transform .2s;
     }
-    nav ul a:hover { color: var(--giallo); }
+    nav ul a:hover { color: var(--giallo); transform: scale(1.2); }
 
     /* ── Hero ── */
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
     .hero {
-      background: linear-gradient(135deg, var(--blu-sc) 0%, var(--blu) 60%, #1565c0 100%);
+      background: linear-gradient(135deg, #00245a, #003580, #1565c0, #0d47a1, #00245a);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
       color: var(--bianco);
       text-align: center;
       padding: 5rem 2rem 4rem;
@@ -623,10 +631,17 @@
         </div>
 
         <div class="card">
+          <div class="badge-patente">Patente BS</div>
+          <div class="card-icon">&#x1F697;</div>
+          <h3>Auto con adattamenti</h3>
+          <p>Per chi necessita di adattamenti al veicolo. Istruttori specializzati e auto attrezzata per la guida con disabilità motoria.</p>
+        </div>
+
+        <div class="card">
           <div class="badge-patente">Patente C / CE</div>
           <div class="card-icon">&#x1F69A;</div>
           <h3>Autocarro / Autoarticolato</h3>
-          <p>Per chi vuole lavorare nel trasporto merci. Includiamo anche la Carta di Qualificazione del Conducente (CQC).</p>
+          <p>Per chi vuole lavorare nel trasporto merci. Effettuiamo corsi per la Carta di Qualificazione del Conducente (CQC).</p>
         </div>
 
         <div class="card">
@@ -640,7 +655,7 @@
           <div class="badge-patente">Revisione / Recupero punti</div>
           <div class="card-icon">&#x1F4CB;</div>
           <h3>Corsi speciali</h3>
-          <p>Corso di recupero punti patente, revisione della patente, guida accompagnata e patente per neopatentati stranieri.</p>
+          <p>Corso di recupero punti patente, revisione della patente e guida accompagnata.</p>
         </div>
 
       </div>
