@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autoscuola San Biagio</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #1a1a2e;
+      background: #f5f7fa;
+    }
+
+    /* ── Palette ── */
+    :root {
+      --blu:      #003580;
+      --blu-sc:   #00245a;
+      --rosso:    #c0392b;
+      --giallo:   #f1c40f;
+      --grigio-ch:#f5f7fa;
+      --grigio:   #e8ecf1;
+      --testo:    #1a1a2e;
+      --bianco:   #ffffff;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: var(--blu-sc);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.35);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      text-decoration: none;
+    }
+    .nav-logo .logo-icon {
+      width: 38px; height: 38px;
+      background: var(--rosso);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; color: var(--bianco); font-weight: 900;
+    }
+    .nav-logo span {
+      color: var(--bianco);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.6rem;
+    }
+    nav ul a {
+      color: #cfd8e8;
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--giallo); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blu-sc) 0%, var(--blu) 60%, #1565c0 100%);
+      color: var(--bianco);
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='1.5' fill='rgba(255,255,255,.07)'/%3E%3C/svg%3E") repeat;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--rosso);
+      color: var(--bianco);
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: .35rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--giallo); }
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 560px;
+      margin: 0 auto 2rem;
+      color: #c8d8f0;
+      line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-block;
+      padding: .75rem 2rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+    .btn-primary { background: var(--rosso); color: var(--bianco); }
+    .btn-outline { border: 2px solid var(--bianco); color: var(--bianco); }
+
+    /* ── Section wrapper ── */
+    section { padding: 4rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--blu-sc);
+      margin-bottom: .5rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: #5a6a7e;
+      margin-bottom: 2.8rem;
+      font-size: .97rem;
+    }
+    .divider {
+      width: 50px; height: 4px;
+      background: var(--rosso);
+      border-radius: 4px;
+      margin: .6rem auto 1.2rem;
+    }
+
+    /* ── Servizi ── */
+    #servizi { background: var(--bianco); }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.4rem;
+    }
+    .card {
+      background: var(--grigio-ch);
+      border: 1px solid var(--grigio);
+      border-radius: 10px;
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .card:hover { box-shadow: 0 8px 24px rgba(0,53,128,.12); transform: translateY(-4px); }
+    .card-icon {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      background: var(--blu);
+      color: var(--bianco);
+      font-size: 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .card h3 { font-size: 1.05rem; color: var(--blu-sc); margin-bottom: .5rem; }
+    .card p  { font-size: .87rem; color: #5a6a7e; line-height: 1.6; }
+    .badge-patente {
+      display: inline-block;
+      background: var(--rosso);
+      color: var(--bianco);
+      font-size: .72rem;
+      font-weight: 700;
+      padding: .2rem .6rem;
+      border-radius: 4px;
+      margin-bottom: .7rem;
+    }
+
+    /* ── Come funziona ── */
+    #come-funziona { background: var(--grigio-ch); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.4rem;
+      counter-reset: step;
+    }
+    .step {
+      background: var(--bianco);
+      border-radius: 10px;
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      border-top: 4px solid var(--blu);
+      box-shadow: 0 2px 10px rgba(0,0,0,.06);
+      position: relative;
+    }
+    .step-num {
+      width: 42px; height: 42px;
+      background: var(--blu);
+      color: var(--bianco);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      margin: 0 auto .9rem;
+    }
+    .step h3 { color: var(--blu-sc); font-size: 1rem; margin-bottom: .4rem; }
+    .step p  { color: #5a6a7e; font-size: .87rem; line-height: 1.6; }
+
+    /* ── Requisiti ── */
+    #requisiti { background: var(--bianco); }
+    .req-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+    }
+    .req-box {
+      border-left: 5px solid var(--blu);
+      background: var(--grigio-ch);
+      border-radius: 0 8px 8px 0;
+      padding: 1.4rem 1.2rem;
+    }
+    .req-box h3 { color: var(--blu-sc); font-size: 1rem; margin-bottom: .7rem; }
+    .req-box ul { padding-left: 1.1rem; color: #3a4a5e; font-size: .88rem; }
+    .req-box ul li { margin-bottom: .4rem; line-height: 1.5; }
+
+    /* ── Documenti per patente ── */
+    #documenti-patente { background: var(--grigio-ch); }
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: 1.8rem;
+      justify-content: center;
+    }
+    .tab-btn {
+      background: var(--bianco);
+      border: 2px solid var(--grigio);
+      border-radius: 6px;
+      padding: .45rem 1.1rem;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--blu-sc);
+      cursor: pointer;
+      transition: background .15s, color .15s, border-color .15s;
+    }
+    .tab-btn:hover { border-color: var(--blu); }
+    .tab-btn.active {
+      background: var(--blu);
+      color: var(--bianco);
+      border-color: var(--blu);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .doc-panel {
+      background: var(--bianco);
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.4rem;
+    }
+    .doc-col h4 {
+      color: var(--rosso);
+      font-size: .85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-bottom: .8rem;
+      padding-bottom: .4rem;
+      border-bottom: 2px solid var(--grigio);
+    }
+    .doc-col ul {
+      padding-left: 1.1rem;
+      color: #3a4a5e;
+      font-size: .88rem;
+    }
+    .doc-col ul li { margin-bottom: .5rem; line-height: 1.55; }
+    .doc-nota {
+      grid-column: 1 / -1;
+      background: #fff8e1;
+      border-left: 4px solid var(--giallo);
+      border-radius: 0 6px 6px 0;
+      padding: .8rem 1rem;
+      font-size: .83rem;
+      color: #5a4a00;
+    }
+
+    /* ── Orari ── */
+    #orari { background: var(--blu-sc); color: var(--bianco); }
+    #orari .section-title { color: var(--bianco); }
+    #orari .section-sub   { color: #a0b8d8; }
+    #orari .divider       { background: var(--giallo); }
+    .orari-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+    }
+    .orari-box {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 10px;
+      padding: 1.6rem 1.4rem;
+    }
+    .orari-box h3 { color: var(--giallo); font-size: 1rem; margin-bottom: 1rem; font-weight: 700; }
+    .orario-row {
+      display: flex;
+      justify-content: space-between;
+      padding: .35rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      font-size: .88rem;
+    }
+    .orario-row:last-child { border-bottom: none; }
+    .orario-row .giorno { color: #c8d8f0; }
+    .orario-row .ora    { color: var(--bianco); font-weight: 600; }
+    .chiuso { color: #e57373 !important; }
+
+    /* ── Contatti ── */
+    #contatti { background: var(--grigio-ch); }
+    .contatti-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.4rem;
+    }
+    .contatto-card {
+      background: var(--bianco);
+      border-radius: 10px;
+      padding: 1.8rem 1.4rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+    }
+    .contatto-icon {
+      width: 54px; height: 54px;
+      background: var(--blu);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto .9rem;
+      font-size: 1.4rem;
+      color: var(--bianco);
+    }
+    .contatto-card h3 { color: var(--blu-sc); font-size: .95rem; margin-bottom: .5rem; font-weight: 700; }
+    .contatto-card p, .contatto-card a {
+      color: #3a4a5e; font-size: .9rem; text-decoration: none; line-height: 1.6;
+    }
+    .contatto-card a:hover { color: var(--rosso); }
+
+    /* ── Mappa ── */
+    .mappa-wrap {
+      margin-top: 2.5rem;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 18px rgba(0,0,0,.12);
+      border: 1px solid var(--grigio);
+    }
+    .mappa-wrap iframe {
+      display: block;
+      width: 100%;
+      height: 380px;
+      border: none;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #0a1628;
+      color: #8a9ab8;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: .83rem;
+      line-height: 1.8;
+    }
+    footer strong { color: var(--bianco); }
+    footer a { color: #8a9ab8; text-decoration: none; }
+    footer a:hover { color: var(--giallo); }
+
+    /* ── Hamburger button ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: .4rem;
+      z-index: 200;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--bianco);
+      border-radius: 2px;
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── Mobile menu ── */
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 64px;
+        left: 0; right: 0;
+        background: var(--blu-sc);
+        padding: 1.2rem 1.5rem 1.8rem;
+        gap: 0;
+        box-shadow: 0 8px 24px rgba(0,0,0,.4);
+        z-index: 150;
+      }
+      nav ul.open { display: flex; }
+      nav ul li { border-bottom: 1px solid rgba(255,255,255,.08); }
+      nav ul li:last-child { border-bottom: none; }
+      nav ul a {
+        display: block;
+        padding: .85rem .2rem;
+        font-size: 1rem;
+        color: #cfd8e8;
+      }
+      nav ul a:hover { color: var(--giallo); }
+
+      .hero { padding: 3.5rem 1.2rem 3rem; }
+      .doc-panel { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="nav-logo" href="#">
+      <div class="logo-icon">SB</div>
+      <span>Autoscuola San Biagio</span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-menu">
+      <li><a href="#servizi">Servizi</a></li>
+      <li><a href="#come-funziona">Come funziona</a></li>
+      <li><a href="#requisiti">Requisiti</a></li>
+      <li><a href="#documenti-patente">Documenti</a></li>
+      <li><a href="#orari">Orari</a></li>
+      <li><a href="#contatti">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Dal 1985 al tuo fianco</div>
+    <h1>La tua patente con<br><span>Autoscuola San Biagio</span></h1>
+    <p>Percorsi di formazione completi per ogni tipo di patente. Istruttori qualificati, lezioni flessibili e un ambiente accogliente per prepararti al meglio alla guida.</p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="#contatti">Prenota un colloquio</a>
+      <a class="btn btn-outline" href="#servizi">Scopri i servizi</a>
+    </div>
+  </header>
+
+  <!-- SERVIZI -->
+  <section id="servizi">
+    <div class="container">
+      <h2 class="section-title">I nostri servizi</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Offriamo corsi per ogni categoria di patente, dalla bicicletta motorizzata al camion.</p>
+      <div class="cards">
+
+        <div class="card">
+          <div class="badge-patente">Patente AM</div>
+          <div class="card-icon">&#x1F6F5;</div>
+          <h3>Ciclomotore / Scooter 50</h3>
+          <p>Conseguibile dai 14 anni. Permette di guidare ciclomotori fino a 50 cc su tutto il territorio nazionale.</p>
+        </div>
+
+        <div class="card">
+          <div class="badge-patente">Patente A1 / A2 / A</div>
+          <div class="card-icon">&#x1F3CD;</div>
+          <h3>Moto</h3>
+          <p>Tre livelli in base all'eta e all'esperienza. Dalla moto leggera fino alle moto di grossa cilindrata senza limiti.</p>
+        </div>
+
+        <div class="card">
+          <div class="badge-patente">Patente B</div>
+          <div class="card-icon">&#x1F697;</div>
+          <h3>Autovettura</h3>
+          <p>La patente piu richiesta. Conseguibile dai 18 anni (17 anni con accompagnatore abilitato - patente B1 anticipata).</p>
+        </div>
+
+        <div class="card">
+          <div class="badge-patente">Patente C / CE</div>
+          <div class="card-icon">&#x1F69A;</div>
+          <h3>Autocarro / Autoarticolato</h3>
+          <p>Per chi vuole lavorare nel trasporto merci. Includiamo anche la Carta di Qualificazione del Conducente (CQC).</p>
+        </div>
+
+        <div class="card">
+          <div class="badge-patente">Patente D / DE</div>
+          <div class="card-icon">&#x1F68C;</div>
+          <h3>Autobus</h3>
+          <p>Per il trasporto di persone. Corsi completi con preparazione alla CQC Persone obbligatoria per uso professionale.</p>
+        </div>
+
+        <div class="card">
+          <div class="badge-patente">Revisione / Recupero punti</div>
+          <div class="card-icon">&#x1F4CB;</div>
+          <h3>Corsi speciali</h3>
+          <p>Corso di recupero punti patente, revisione della patente, guida accompagnata e patente per neopatentati stranieri.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COME FUNZIONA -->
+  <section id="come-funziona">
+    <div class="container">
+      <h2 class="section-title">Come funziona</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Quattro semplici passi per ottenere la tua patente.</p>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Iscrizione</h3>
+          <p>Vieni in sede con un documento d'identita e codice fiscale. Ti guidiamo nella scelta del percorso piu adatto.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Visita medica</h3>
+          <p>Presso il nostro medico convenzionato o l'ASL di zona. Necessaria per certificare l'idoneita alla guida.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Esame teorico</h3>
+          <p>Frequenta il corso con i nostri istruttori o studia online con il nostro materiale didattico. Quiz al computer in Motorizzazione.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Esame pratico</h3>
+          <p>Lezioni di guida personalizzate fino al superamento dell'esame in presenza di un esaminatore della Motorizzazione Civile.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUISITI -->
+  <section id="requisiti">
+    <div class="container">
+      <h2 class="section-title">Documenti e requisiti</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Cosa portare al momento dell'iscrizione.</p>
+      <div class="req-grid">
+
+        <div class="req-box">
+          <h3>Documenti richiesti</h3>
+          <ul>
+            <li>Carta d'identita valida o passaporto</li>
+            <li>Codice fiscale (tessera sanitaria)</li>
+            <li>2 foto tessera recenti</li>
+            <li>Permesso di soggiorno (per cittadini extra-UE)</li>
+            <li>Eventuale patente gia in possesso</li>
+          </ul>
+        </div>
+
+        <div class="req-box">
+          <h3>Eta minima per categoria</h3>
+          <ul>
+            <li><strong>AM</strong> - 14 anni</li>
+            <li><strong>A1</strong> - 16 anni</li>
+            <li><strong>A2</strong> - 18 anni</li>
+            <li><strong>A</strong> - 24 anni (o 21 con A2 da 2 anni)</li>
+            <li><strong>B</strong> - 18 anni (17 con guida accompagnata)</li>
+            <li><strong>C / D</strong> - 18 anni (C) / 21 anni (D)</li>
+          </ul>
+        </div>
+
+        <div class="req-box">
+          <h3>Costi indicativi</h3>
+          <ul>
+            <li>Diritti di segreteria e pratiche</li>
+            <li>Quota corso teorico</li>
+            <li>Lezioni di guida (pacchetti disponibili)</li>
+            <li>Diritti di esame Motorizzazione</li>
+            <li>Visita medica</li>
+          </ul>
+          <p style="margin-top:.7rem;font-size:.82rem;color:#7a8a9e;">Contattaci per un preventivo personalizzato senza impegno.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTI PER PATENTE -->
+  <section id="documenti-patente">
+    <div class="container">
+      <h2 class="section-title">Documenti richiesti per categoria</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Seleziona la patente di interesse per vedere l'elenco completo dei documenti necessari.</p>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="am">Patente AM</button>
+        <button class="tab-btn" data-tab="a1">Patente A1</button>
+        <button class="tab-btn" data-tab="a2">Patente A2</button>
+        <button class="tab-btn" data-tab="a">Patente A</button>
+        <button class="tab-btn" data-tab="b">Patente B</button>
+        <button class="tab-btn" data-tab="b-acc">Patente B (accompagnata)</button>
+        <button class="tab-btn" data-tab="c">Patente C / CE</button>
+        <button class="tab-btn" data-tab="d">Patente D / DE</button>
+      </div>
+
+      <!-- AM -->
+      <div class="tab-panel active" id="tab-am">
+        <div class="doc-panel">
+          <div class="doc-col">
+            <h4>Documenti di identita</h4>
+            <ul>
+              <li>Documento d'identita valido (carta d'identita o passaporto)</li>
+              <li>Codice fiscale / tessera sanitaria</li>
+              <li>2 foto tessera recenti su sfondo bianco</li>
+              <li>Permesso di soggiorno in corso di validita (solo per cittadini extra-UE)</li>
+            </ul>
+          </div>
+          <div class="doc-col">
+            <h4>Idoneita e consensi</h4>
+            <ul>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Consenso di entrambi i genitori (se minorenne, eta minima 14 anni)</li>
+              <li>Documento d'identita del genitore firmatario</li>
+            </ul>
+          </div>
+          <div class="doc-nota">
+            La patente AM abilita alla guida di ciclomotori fino a 50 cc e velocita massima 45 km/h. E' conseguibile a partire dai <strong>14 anni</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- A1 -->
+      <div class="tab-panel" id="tab-a1">
+        <div class="doc-panel">
+          <div class="doc-col">
+            <h4>Documenti di identita</h4>
+            <ul>
+              <li>Documento d'identita valido (carta d'identita o passaporto)</li>
+              <li>Codice fiscale / tessera sanitaria</li>
+              <li>2 foto tessera recenti su sfondo bianco</li>
+              <li>Permesso di soggiorno in corso di validita (solo per cittadini extra-UE)</li>
+            </ul>
+          </div>
+          <div class="doc-col">
+            <h4>Idoneita e altro</h4>
+            <ul>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Consenso di entrambi i genitori (se minorenne, eta minima 16 anni)</li>
+              <li>Copia patente AM se gia in possesso (per esonero parte teorica)</li>
+            </ul>
+          </div>
+          <div class="doc-nota">
+            La patente A1 permette di guidare moto fino a 125 cc e 11 kW. Eta minima <strong>16 anni</strong>.
+          </div>
+        </div>
+      </div>
+
+      <!-- A2 -->
+      <div class="tab-panel" id="tab-a2">
+        <div class="doc-panel">
+          <div class="doc-col">
+            <h4>Documenti di identita</h4>
+            <ul>
+              <li>Documento d'identita valido (carta d'identita o passaporto)</li>
+              <li>Codice fiscale / tessera sanitaria</li>
+              <li>2 foto tessera recenti su sfondo bianco</li>
+              <li>Permesso di soggiorno in corso di validita (solo per cittadini extra-UE)</li>
+            </ul>
+          </div>
+          <div class="doc-col">
+            <h4>Idoneita e altro</h4>
+            <ul>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Copia patente A1 se gia in possesso (riduzione prove d'esame)</li>
+            </ul>
+          </div>
+          <div class="doc-nota">
+            La patente A2 permette moto fino a 35 kW. Eta minima <strong>18 anni</strong>. Chi possiede A1 da almeno 2 anni sostiene solo la prova pratica.
+          </div>
+        </div>
+      </div>
+
+      <!-- A -->
+      <div class="tab-panel" id="tab-a">
+        <div class="doc-panel">
+          <div class="doc-col">
+            <h4>Documenti di identita</h4>
+            <ul>
+              <li>Documento d'identita valido (carta d'identita o passaporto)</li>
+              <li>Codice fiscale / tessera sanitaria</li>
+              <li>2 foto tessera recenti su sfondo bianco</li>
+              <li>Permesso di soggiorno in corso di validita (solo per cittadini extra-UE)</li>
+            </ul>
+          </div>
+          <div class="doc-col">
+            <h4>Idoneita e altro</h4>
+            <ul>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Copia patente A2 (obbligatoria per accesso a 21 anni con 2 anni di A2)</li>
+            </ul>
+          </div>
+          <div class="doc-nota">
+            Eta minima <strong>24 anni</strong> (accesso diretto) oppure <strong>21 anni</strong> con patente A2 conseguita da almeno 2 anni. Nessun limite di cilindrata.
+          </div>
+        </div>
+      </div>
+
+      <!-- B -->
+      <div class="tab-panel" id="tab-b">
+        <div class="doc-panel">
+          <div class="doc-col">
+            <h4>Documenti di identita</h4>
+            <ul>
+              <li>Documento d'identita valido (carta d'identita o passaporto)</li>
+              <li>Codice fiscale / tessera sanitaria</li>
+              <li>2 foto tessera recenti su sfondo bianco</li>
+              <li>Permesso di soggiorno in corso di validita (solo per cittadini extra-UE)</li>
+            </ul>
+          </div>
+          <div class="doc-col">
+            <h4>Idoneita e altro</h4>
+            <ul>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Copia patente AM o A1/A2 se gia in possesso (esoneri parziali)</li>
+            </ul>
+          </div>
+          <div class="doc-nota">
+            Eta minima <strong>18 anni</strong>. La patente B abilita alla guida di autovetture fino a 3.500 kg e al massimo 8 posti passeggeri.
+          </div>
+        </div>
+      </div>
+
+      <!-- B ACCOMPAGNATA -->
+      <div class="tab-panel" id="tab-b-acc">
+        <div class="doc-panel">
+          <div class="doc-col">
+            <h4>Documenti del candidato (17 anni)</h4>
+            <ul>
+              <li>Documento d'identita valido</li>
+              <li>Codice fiscale / tessera sanitaria</li>
+              <li>2 foto tessera recenti su sfondo bianco</li>
+              <li>Certificato di idoneita psicofisica</li>
+              <li>Consenso scritto di entrambi i genitori</li>
+            </ul>
+          </div>
+          <div class="doc-col">
+            <h4>Documenti dell'accompagnatore</h4>
+            <ul>
+              <li>Documento d'identita valido</li>
+              <li>Patente B in corso di validita, conseguita da almeno 10 anni</li>
+              <li>Eta compresa tra 30 e 70 anni</li>
+              <li>Nessuna sospensione della patente negli ultimi 5 anni</li>
+              <li>Foglio rosa del candidato da esibire durante la guida</li>
+            </ul>
+          </div>
+          <div class="doc-nota">
+            La guida accompagnata permette di esercitarsi dai <strong>17 anni</strong>. Al compimento dei 18 anni si puo sostenere l'esame pratico con iter semplificato.
+          </div>
+        </div>
+      </div>
+
+      <!-- C / CE -->
+      <div class="tab-panel" id="tab-c">
+        <div class="doc-panel">
+          <div class="doc-col">
+            <h4>Documenti di identita</h4>
+            <ul>
+              <li>Documento d'identita valido (carta d'identita o passaporto)</li>
+              <li>Codice fiscale / tessera sanitaria</li>
+              <li>2 foto tessera recenti su sfondo bianco</li>
+              <li>Permesso di soggiorno in corso di validita (solo per cittadini extra-UE)</li>
+              <li>Copia della patente B gia in possesso (obbligatoria)</li>
+            </ul>
+          </div>
+          <div class="doc-col">
+            <h4>Idoneita e qualifiche</h4>
+            <ul>
+              <li>Visita medica speciale presso commissione medica locale (non basta il medico di base)</li>
+              <li>Attestato CQC Merci (per uso professionale e trasporto per conto terzi)</li>
+              <li>Per patente CE: copia patente C gia conseguita</li>
+            </ul>
+          </div>
+          <div class="doc-nota">
+            Eta minima <strong>18 anni</strong> per patente C (21 anni per uso professionale senza CQC). La CE richiede il possesso della C. La CQC Merci e' obbligatoria per il trasporto professionale.
+          </div>
+        </div>
+      </div>
+
+      <!-- D / DE -->
+      <div class="tab-panel" id="tab-d">
+        <div class="doc-panel">
+          <div class="doc-col">
+            <h4>Documenti di identita</h4>
+            <ul>
+              <li>Documento d'identita valido (carta d'identita o passaporto)</li>
+              <li>Codice fiscale / tessera sanitaria</li>
+              <li>2 foto tessera recenti su sfondo bianco</li>
+              <li>Permesso di soggiorno in corso di validita (solo per cittadini extra-UE)</li>
+              <li>Copia della patente B gia in possesso (obbligatoria)</li>
+            </ul>
+          </div>
+          <div class="doc-col">
+            <h4>Idoneita e qualifiche</h4>
+            <ul>
+              <li>Visita medica speciale presso commissione medica locale</li>
+              <li>Attestato CQC Persone (obbligatorio per uso professionale)</li>
+              <li>Per patente DE: copia patente D gia conseguita</li>
+              <li>Certificato penale del casellario giudiziale (in alcuni casi)</li>
+            </ul>
+          </div>
+          <div class="doc-nota">
+            Eta minima <strong>21 anni</strong> per patente D. La DE richiede il possesso della D. La CQC Persone e' obbligatoria per il trasporto pubblico di passeggeri.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ORARI -->
+  <section id="orari">
+    <div class="container">
+      <h2 class="section-title">Orari di apertura</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Siamo disponibili anche per appuntamenti fuori orario.</p>
+      <div class="orari-grid">
+
+        <div class="orari-box">
+          <h3>Segreteria</h3>
+          <div class="orario-row"><span class="giorno">Lunedi - Venerdi</span><span class="ora">09:00 - 12:00 / 15:00 - 19:30</span></div>
+          <div class="orario-row"><span class="giorno">Sabato</span><span class="ora">09:00 - 12:00</span></div>
+          <div class="orario-row"><span class="giorno">Domenica</span><span class="ora chiuso">Chiuso</span></div>
+        </div>
+
+        <div class="orari-box">
+          <h3>Lezioni teoriche</h3>
+          <div class="orario-row"><span class="giorno">Lunedi / Martedi / Giovedi</span><span class="ora">15:00 e 19:00</span></div>
+          <div class="orario-row"><span class="giorno">Mercoledi / Venerdi / Sabato</span><span class="ora chiuso">Nessuna lezione</span></div>
+          <div class="orario-row"><span class="giorno">Domenica</span><span class="ora chiuso">Chiuso</span></div>
+        </div>
+
+        <div class="orari-box">
+          <h3>Lezioni di guida</h3>
+          <div class="orario-row"><span class="giorno">Lunedi - Sabato</span><span class="ora">07:00 - 20:00</span></div>
+          <div class="orario-row"><span class="giorno">Domenica</span><span class="ora">Su appuntamento</span></div>
+          <div class="orario-row"><span class="giorno">Festivi</span><span class="ora chiuso">Chiuso</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contatti">
+    <div class="container">
+      <h2 class="section-title">Contatti</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Vieni a trovarci, chiamaci o scrivici. Siamo qui per rispondere a ogni tua domanda.</p>
+      <div class="contatti-grid">
+
+        <div class="contatto-card">
+          <div class="contatto-icon">&#x1F4CD;</div>
+          <h3>Dove siamo</h3>
+          <p>Via Serrati, 13<br>26845 - Codogno (LO)<br>Facile accesso con mezzi pubblici</p>
+        </div>
+
+        <div class="contatto-card">
+          <div class="contatto-icon">&#x1F4DE;</div>
+          <h3>Telefono</h3>
+          <p><a href="tel:+39037732363">0377 32363</a><br>Lun - Ven: 09:00 - 19:00<br>Sab: 09:00 - 13:00</p>
+        </div>
+
+        <div class="contatto-card">
+          <div class="contatto-icon">&#x2709;</div>
+          <h3>Email</h3>
+          <p><a href="mailto:autoscuolasanbiagio@libero.it">autoscuolasanbiagio@libero.it</a><br>Risposta entro 24 ore lavorative</p>
+        </div>
+
+        <div class="contatto-card">
+          <div class="contatto-icon">&#x1F4AC;</div>
+          <h3>WhatsApp</h3>
+          <p><a href="https://wa.me/39037732363">Scrivici su WhatsApp</a><br>Per informazioni rapide<br>e prenotazioni lezioni</p>
+        </div>
+
+      </div>
+
+      <div class="mappa-wrap">
+        <iframe
+          src="https://www.google.com/maps?q=Via+Serrati+13,+26845+Codogno+LO,+Italia&output=embed"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Posizione Autoscuola San Biagio - Via Serrati 13, Codogno">
+        </iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Autoscuola San Biagio</strong></p>
+    <p>Via Serrati, 13 &mdash; 26845 Codogno (LO) &mdash; P.IVA 00000000000</p>
+    <p>Tel: <a href="tel:+39037732363">0377 32363</a> &mdash; Email: <a href="mailto:autoscuolasanbiagio@libero.it">autoscuolasanbiagio@libero.it</a></p>
+    <p style="margin-top:.8rem;font-size:.78rem;">&copy; 2026 Autoscuola San Biagio &mdash; Tutti i diritti riservati &mdash; <a href="#">Privacy Policy</a> &mdash; <a href="#">Cookie Policy</a></p>
+  </footer>
+
+  <script>
+    /* ── Hamburger menu ── */
+    const hamburger = document.getElementById('hamburger');
+    const navMenu   = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = navMenu.classList.toggle('open');
+      hamburger.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', false);
+      });
+    });
+
+    /* ── Tab patenti ── */
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
