@@ -1357,7 +1357,7 @@
   </script>
 
   <!-- COOKIE BANNER -->
-  <div id="cookie-banner" role="dialog" aria-label="Consenso cookie" style="display:none">
+  <div id="cookie-banner" role="dialog" aria-label="Consenso cookie">
     <p>
       Questo sito usa <strong>cookie tecnici</strong> necessari al funzionamento e, nella sezione Contatti,
       un'integrazione con <strong>Google Maps</strong> che può impostare cookie di terze parti.
@@ -1402,10 +1402,9 @@
 
       // Stato iniziale
       const consent = getConsent();
-      if (!consent) {
-        showBanner();
-      } else if (consent === 'all') {
-        loadMap();
+      if (consent) {
+        hideBanner();
+        if (consent === 'all') loadMap();
       }
 
       // Accetta tutto
