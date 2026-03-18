@@ -412,45 +412,6 @@
       border: none;
     }
 
-    /* ── WhatsApp floating ── */
-    .wa-float {
-      position: fixed;
-      bottom: 1.8rem;
-      right: 1.8rem;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      text-decoration: none;
-      filter: drop-shadow(0 4px 12px rgba(0,0,0,.25));
-      transition: transform .2s;
-    }
-    .wa-float:hover { transform: scale(1.08); }
-    .wa-float .wa-icon {
-      width: 56px; height: 56px;
-      background: #25d366;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .wa-float .wa-icon svg { width: 30px; height: 30px; fill: #ffffff; }
-    .wa-float .wa-label {
-      background: #25d366;
-      color: #ffffff;
-      font-size: .82rem;
-      font-weight: 700;
-      padding: .4rem .85rem;
-      border-radius: 20px;
-      white-space: nowrap;
-      opacity: 0;
-      transform: translateX(8px);
-      transition: opacity .25s, transform .25s;
-      pointer-events: none;
-    }
-    .wa-float:hover .wa-label { opacity: 1; transform: translateX(0); }
-    @media (max-width: 480px) {
-      .wa-float { bottom: 1.2rem; right: 1.2rem; }
-      .wa-float .wa-icon { width: 50px; height: 50px; }
-    }
 
     /* ── Recensioni ── */
     #recensioni { background: var(--bianco); }
@@ -1291,11 +1252,6 @@
           <p><a href="mailto:autoscuolasanbiagio@libero.it">autoscuolasanbiagio@libero.it</a><br>Risposta entro 24 ore lavorative</p>
         </div>
 
-        <div class="contatto-card">
-          <div class="contatto-icon">&#x1F4AC;</div>
-          <h3>WhatsApp</h3>
-          <p><a href="https://wa.me/39037732363">Scrivici su WhatsApp</a><br>Per informazioni rapide<br>e prenotazioni lezioni</p>
-        </div>
 
       </div>
 
@@ -1320,15 +1276,6 @@
     </div>
   </section>
 
-  <!-- WHATSAPP FLOATING -->
-  <a class="wa-float" href="https://wa.me/39037732363" target="_blank" rel="noopener" aria-label="Contattaci su WhatsApp">
-    <span class="wa-label">Scrivici su WhatsApp</span>
-    <div class="wa-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true">
-        <path d="M16 2C8.268 2 2 8.268 2 16c0 2.492.648 4.831 1.782 6.86L2 30l7.338-1.762A13.93 13.93 0 0 0 16 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.6a11.54 11.54 0 0 1-5.88-1.608l-.42-.25-4.354 1.046 1.072-4.244-.274-.436A11.56 11.56 0 0 1 4.4 16C4.4 9.59 9.59 4.4 16 4.4S27.6 9.59 27.6 16 22.41 27.6 16 27.6zm6.344-8.668c-.348-.174-2.06-1.016-2.38-1.132-.32-.116-.552-.174-.784.174-.232.348-.9 1.132-1.102 1.364-.202.232-.404.26-.752.086-.348-.174-1.47-.542-2.8-1.726-1.034-.922-1.732-2.06-1.936-2.408-.202-.348-.022-.536.152-.708.156-.156.348-.406.522-.61.174-.202.232-.348.348-.58.116-.232.058-.436-.028-.61-.086-.174-.784-1.89-1.074-2.588-.282-.68-.57-.588-.784-.598l-.668-.012c-.232 0-.61.086-.928.436-.318.348-1.218 1.19-1.218 2.9s1.246 3.364 1.42 3.596c.174.232 2.452 3.744 5.942 5.252.83.358 1.478.572 1.984.732.834.264 1.592.226 2.192.138.668-.1 2.06-.842 2.35-1.656.29-.814.29-1.512.204-1.656-.086-.144-.318-.232-.666-.406z"/>
-      </svg>
-    </div>
-  </a>
 
   <!-- FOOTER -->
   <footer>
@@ -1428,7 +1375,6 @@
       const banner      = document.getElementById('cookie-banner');
       const mapIframe   = document.getElementById('mappa-iframe');
       const mapHolder   = document.getElementById('mappa-placeholder');
-      const waFloat     = document.querySelector('.wa-float');
 
       function getConsent() {
         try { return localStorage.getItem('cookie_consent'); }
@@ -1448,12 +1394,10 @@
 
       function showBanner() {
         banner.style.display = 'flex';
-        if (waFloat) waFloat.style.display = 'none';
       }
 
       function hideBanner() {
         banner.style.display = 'none';
-        if (waFloat) waFloat.style.display = '';
       }
 
       // Stato iniziale
