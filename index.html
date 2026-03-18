@@ -1428,6 +1428,7 @@
       const banner      = document.getElementById('cookie-banner');
       const mapIframe   = document.getElementById('mappa-iframe');
       const mapHolder   = document.getElementById('mappa-placeholder');
+      const waFloat     = document.querySelector('.wa-float');
 
       function getConsent() {
         try { return localStorage.getItem('cookie_consent'); }
@@ -1445,10 +1446,20 @@
         if (mapHolder)  mapHolder.style.display  = 'none';
       }
 
+      function showBanner() {
+        banner.style.display = 'flex';
+        if (waFloat) waFloat.style.display = 'none';
+      }
+
+      function hideBanner() {
+        banner.style.display = 'none';
+        if (waFloat) waFloat.style.display = '';
+      }
+
       // Stato iniziale
       const consent = getConsent();
       if (!consent) {
-        banner.style.display = 'flex';
+        showBanner();
       } else if (consent === 'all') {
         loadMap();
       }
@@ -1456,14 +1467,14 @@
       // Accetta tutto
       document.getElementById('cookie-accept').addEventListener('click', () => {
         setConsent('all');
-        banner.style.display = 'none';
+        hideBanner();
         loadMap();
       });
 
       // Rifiuta terze parti
       document.getElementById('cookie-reject').addEventListener('click', () => {
         setConsent('necessary');
-        banner.style.display = 'none';
+        hideBanner();
       });
 
       // Bottone "Accetta e visualizza la mappa" dentro il placeholder
