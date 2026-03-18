@@ -1282,7 +1282,7 @@
     <p><strong>Autoscuola San Biagio</strong></p>
     <p>Via Serrati, 13 &mdash; 26845 Codogno (LO) &mdash; P.IVA 10562230150</p>
     <p>Tel: <a href="tel:+39037732363">0377 32363</a> &mdash; Email: <a href="mailto:autoscuolasanbiagio@libero.it">autoscuolasanbiagio@libero.it</a></p>
-    <p style="margin-top:.8rem;font-size:.78rem;">&copy; 2026 Autoscuola San Biagio &mdash; Tutti i diritti riservati &mdash; <a href="privacy.html">Privacy Policy</a> &mdash; <a href="cookie.html">Cookie Policy</a></p>
+    <p style="margin-top:.8rem;font-size:.78rem;">&copy; 2026 Autoscuola San Biagio &mdash; Tutti i diritti riservati &mdash; <a href="privacy.html">Privacy Policy</a> &mdash; <a href="cookie.html">Cookie Policy</a> &mdash; <a href="#" id="gestisci-cookie">Gestisci cookie</a></p>
   </footer>
 
   <script>
@@ -1419,6 +1419,17 @@
         setConsent('necessary');
         hideBanner();
       });
+
+      // Link "Gestisci cookie" nel footer
+      const gestisciLink = document.getElementById('gestisci-cookie');
+      if (gestisciLink) {
+        gestisciLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          try { localStorage.removeItem('cookie_consent'); } catch(err) {}
+          showBanner();
+          banner.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        });
+      }
 
       // Bottone "Accetta e visualizza la mappa" dentro il placeholder
       if (mapHolder) {
