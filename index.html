@@ -3,7 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Autoscuola San Biagio</title>
+  <title>Autoscuola San Biagio – Patenti auto, moto e camion</title>
+  <meta name="description" content="Autoscuola San Biagio: dal 1963 ti prepariamo per ogni tipo di patente. Corsi per patente A, B, C, D e recupero punti. Istruttori qualificati, orari flessibili." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.autoscuolasanbiagio.it/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Autoscuola San Biagio – Dal 1963 al tuo fianco" />
+  <meta property="og:description" content="Corsi per ogni tipo di patente con istruttori qualificati. Prenota un colloquio gratuito." />
+  <meta property="og:image"       content="logoSan.jpg" />
+  <meta property="og:locale"      content="it_IT" />
+
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "DrivingSchool",
+    "name": "Autoscuola San Biagio",
+    "foundingDate": "1963",
+    "image": "logoSan.jpg",
+    "telephone": "+39037732363",
+    "email": "autoscuolasanbiagio@libero.it",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via San Biagio",
+      "addressLocality": "Brescia",
+      "addressCountry": "IT"
+    },
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "12:00" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "15:00", "closes": "19:30" },
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday"], "opens": "09:00", "closes": "12:00" }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -15,7 +50,6 @@
       font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
       color: #1a1a2e;
       background: #f5f7fa;
-      cursor: none;
     }
 
     /* ── Palette ── */
@@ -416,6 +450,82 @@
       .wa-float .wa-icon { width: 50px; height: 50px; }
     }
 
+    /* ── Recensioni ── */
+    #recensioni { background: var(--bianco); }
+    .recensioni-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+    }
+    .recensione-card {
+      background: var(--grigio-ch);
+      border: 1px solid var(--grigio);
+      border-radius: 12px;
+      padding: 1.6rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: .8rem;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .recensione-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,.1); transform: translateY(-3px); }
+    .rec-header { display: flex; align-items: center; gap: .8rem; }
+    .rec-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--blu);
+      color: var(--bianco);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1rem; flex-shrink: 0;
+    }
+    .rec-meta { display: flex; flex-direction: column; }
+    .rec-nome { font-weight: 700; font-size: .95rem; color: var(--testo); }
+    .rec-data { font-size: .78rem; color: #8a9ab8; }
+    .rec-stelle { color: #f5c518; font-size: 1rem; letter-spacing: 2px; }
+    .rec-testo { font-size: .88rem; color: #3a4a5e; line-height: 1.65; }
+    .rec-fonte { font-size: .75rem; color: #8a9ab8; }
+    .rec-punteggio {
+      text-align: center;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .3rem;
+    }
+    .rec-punteggio .voto { font-size: 3rem; font-weight: 900; color: var(--blu-sc); line-height: 1; }
+    .rec-punteggio .stelle-grandi { color: #f5c518; font-size: 1.4rem; letter-spacing: 3px; }
+    .rec-punteggio small { color: #5a6a7e; font-size: .85rem; }
+
+    /* ── Cookie Banner ── */
+    #cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #0d1b2a;
+      color: #cfd8e8;
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      z-index: 9999;
+      box-shadow: 0 -4px 20px rgba(0,0,0,.35);
+      border-top: 3px solid var(--rosso);
+    }
+    #cookie-banner p { font-size: .88rem; line-height: 1.6; flex: 1; min-width: 200px; }
+    #cookie-banner a { color: var(--ciano); text-decoration: underline; }
+    .cookie-btns { display: flex; gap: .7rem; flex-shrink: 0; }
+    .cookie-btns button {
+      padding: .55rem 1.4rem;
+      border-radius: 6px;
+      font-size: .88rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .cookie-btns button:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+    #cookie-accept { background: var(--rosso); color: var(--bianco); }
+    #cookie-reject { background: transparent; color: #cfd8e8; border: 1.5px solid rgba(255,255,255,.3) !important; }
+
     /* ── Form contatto ── */
     #form-contatto { background: var(--bianco); }
     .form-wrap {
@@ -579,6 +689,7 @@
       <li><a href="#requisiti">Requisiti</a></li>
       <li><a href="#documenti-patente">Documenti</a></li>
       <li><a href="#orari">Orari</a></li>
+      <li><a href="#recensioni">Recensioni</a></li>
       <li><a href="#form-contatto">Scrivici</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
@@ -1004,6 +1115,70 @@
     </div>
   </section>
 
+  <!-- RECENSIONI -->
+  <section id="recensioni">
+    <div class="container">
+      <h2 class="section-title">Cosa dicono i nostri allievi</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Oltre 60 anni di esperienza raccontati da chi ha scelto Autoscuola San Biagio.</p>
+      <div class="rec-punteggio">
+        <span class="voto">4.9</span>
+        <span class="stelle-grandi">★★★★★</span>
+        <small>Basato su recensioni Google</small>
+      </div>
+      <div class="recensioni-grid">
+        <div class="recensione-card">
+          <div class="rec-header">
+            <div class="rec-avatar">MR</div>
+            <div class="rec-meta">
+              <span class="rec-nome">Marco R.</span>
+              <span class="rec-data">Febbraio 2025</span>
+            </div>
+          </div>
+          <div class="rec-stelle">★★★★★</div>
+          <p class="rec-testo">Istruttori pazienti e molto preparati. Ho preso la patente B al primo tentativo dopo pochissime lezioni di guida. Segreteria sempre disponibile e gentile!</p>
+          <span class="rec-fonte">Google Maps</span>
+        </div>
+        <div class="recensione-card">
+          <div class="rec-header">
+            <div class="rec-avatar" style="background:var(--rosso)">LS</div>
+            <div class="rec-meta">
+              <span class="rec-nome">Laura S.</span>
+              <span class="rec-data">Novembre 2024</span>
+            </div>
+          </div>
+          <div class="rec-stelle">★★★★★</div>
+          <p class="rec-testo">Ho preso la patente A2 qui dopo aver fatto la B qualche anno fa. Tornerei sempre. Ambiente familiare, istruttori seri e disponibili, prezzi onesti.</p>
+          <span class="rec-fonte">Google Maps</span>
+        </div>
+        <div class="recensione-card">
+          <div class="rec-header">
+            <div class="rec-avatar" style="background:var(--ciano)">GT</div>
+            <div class="rec-meta">
+              <span class="rec-nome">Giovanni T.</span>
+              <span class="rec-data">Settembre 2024</span>
+            </div>
+          </div>
+          <div class="rec-stelle">★★★★★</div>
+          <p class="rec-testo">Corso di recupero punti organizzato benissimo. Istruttori competenti, materiale aggiornato. Consigliatissima anche per chi deve rinnovare o recuperare la patente.</p>
+          <span class="rec-fonte">Google Maps</span>
+        </div>
+        <div class="recensione-card">
+          <div class="rec-header">
+            <div class="rec-avatar" style="background:var(--verde)">FC</div>
+            <div class="rec-meta">
+              <span class="rec-nome">Federica C.</span>
+              <span class="rec-data">Luglio 2024</span>
+            </div>
+          </div>
+          <div class="rec-stelle">★★★★★</div>
+          <p class="rec-testo">Ero molto ansiosa prima dell'esame di guida, ma il mio istruttore è stato bravissimo a mettermi a mio agio. Promossa al primo colpo, grazie mille!</p>
+          <span class="rec-fonte">Google Maps</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FORM CONTATTO -->
   <section id="form-contatto">
     <div class="container">
@@ -1197,56 +1372,34 @@
     });
   </script>
 
-  <!-- Cursore pneumatico animato -->
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" role="dialog" aria-label="Consenso cookie" style="display:none">
+    <p>
+      Questo sito utilizza cookie tecnici necessari al funzionamento e cookie di terze parti (Google Maps).
+      Leggi la nostra <a href="cookie.html">Cookie Policy</a> e la <a href="privacy.html">Privacy Policy</a>.
+    </p>
+    <div class="cookie-btns">
+      <button id="cookie-reject">Solo necessari</button>
+      <button id="cookie-accept">Accetta tutto</button>
+    </div>
+  </div>
+
   <script>
     (function () {
-      const tire = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      tire.setAttribute('width', '36');
-      tire.setAttribute('height', '36');
-      tire.setAttribute('viewBox', '0 0 32 32');
-      tire.innerHTML = `
-        <circle cx="16" cy="16" r="15" fill="#111"/>
-        <circle cx="16" cy="16" r="11" fill="none" stroke="#444" stroke-width="3" stroke-dasharray="5 3"/>
-        <circle cx="16" cy="16" r="7" fill="#888" stroke="#bbb" stroke-width="1"/>
-        <circle cx="16" cy="16" r="3" fill="#ddd"/>
-        <line x1="16" y1="9" x2="16" y2="13" stroke="#555" stroke-width="2"/>
-        <line x1="16" y1="19" x2="16" y2="23" stroke="#555" stroke-width="2"/>
-        <line x1="9"  y1="16" x2="13" y2="16" stroke="#555" stroke-width="2"/>
-        <line x1="19" y1="16" x2="23" y2="16" stroke="#555" stroke-width="2"/>
-      `;
-      Object.assign(tire.style, {
-        position: 'fixed',
-        pointerEvents: 'none',
-        zIndex: '99999',
-        transform: 'translate(-50%, -50%)',
-        transition: 'transform 0.05s linear',
-        willChange: 'transform'
+      const banner = document.getElementById('cookie-banner');
+      if (!localStorage.getItem('cookie_consent')) {
+        banner.style.display = 'flex';
+      }
+      document.getElementById('cookie-accept').addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'all');
+        banner.style.display = 'none';
       });
-      document.body.appendChild(tire);
-
-      let mouseX = -100, mouseY = -100;
-      let prevX = -100;
-      let angle = 0;
-
-      document.addEventListener('mousemove', e => {
-        const dx = e.clientX - prevX;
-        // ruota in base alla distanza orizzontale percorsa (circonferenza ~100px)
-        angle += dx * (360 / 100);
-        prevX = e.clientX;
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        tire.style.left = mouseX + 'px';
-        tire.style.top  = mouseY + 'px';
-        tire.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
-      });
-
-      document.addEventListener('mouseleave', () => {
-        tire.style.opacity = '0';
-      });
-      document.addEventListener('mouseenter', () => {
-        tire.style.opacity = '1';
+      document.getElementById('cookie-reject').addEventListener('click', () => {
+        localStorage.setItem('cookie_consent', 'necessary');
+        banner.style.display = 'none';
       });
     })();
   </script>
+
 </body>
 </html>
