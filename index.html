@@ -494,6 +494,37 @@
     .rec-punteggio .stelle-grandi { color: #f5c518; font-size: 1.4rem; letter-spacing: 3px; }
     .rec-punteggio small { color: #5a6a7e; font-size: .85rem; }
 
+    /* ── Mappa placeholder ── */
+    .mappa-placeholder {
+      width: 100%; height: 380px;
+      background: var(--grigio-ch);
+      border: 1px dashed var(--grigio);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+      padding: 2rem;
+      color: #5a6a7e;
+      font-size: .9rem;
+    }
+    .mappa-placeholder p { line-height: 1.6; }
+    .mappa-placeholder a { color: var(--ciano); text-decoration: underline; }
+    .mappa-placeholder .btn-mappa {
+      background: var(--blu);
+      color: var(--bianco);
+      border: none;
+      padding: .6rem 1.4rem;
+      border-radius: 6px;
+      font-size: .88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .mappa-placeholder .btn-mappa:hover { background: var(--rosso); }
+
     /* ── Cookie Banner ── */
     #cookie-banner {
       position: fixed;
@@ -506,7 +537,7 @@
       justify-content: space-between;
       gap: 1.2rem;
       flex-wrap: wrap;
-      z-index: 9999;
+      z-index: 500;
       box-shadow: 0 -4px 20px rgba(0,0,0,.35);
       border-top: 3px solid var(--rosso);
     }
@@ -1271,12 +1302,20 @@
       </div>
 
       <div class="mappa-wrap">
+        <div id="mappa-placeholder" class="mappa-placeholder">
+          <p>&#x1F5FA; La mappa utilizza cookie di Google Maps (terze parti).<br>
+             Accetta i cookie per visualizzarla, oppure <a href="https://maps.google.com/?q=Via+Serrati+13,+26845+Codogno+LO" target="_blank" rel="noopener noreferrer">aprila direttamente su Google Maps ↗</a>.</p>
+          <button class="btn-mappa" id="mappa-accetta">Accetta e visualizza la mappa</button>
+        </div>
         <iframe
-          src="https://www.google.com/maps?q=Via+Serrati+13,+26845+Codogno+LO,+Italia&output=embed"
+          id="mappa-iframe"
+          src=""
+          data-src="https://www.google.com/maps?q=Via+Serrati+13,+26845+Codogno+LO,+Italia&output=embed"
           allowfullscreen
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Posizione Autoscuola San Biagio - Via Serrati 13, Codogno">
+          title="Posizione Autoscuola San Biagio - Via Serrati 13, Codogno"
+          style="display:none">
         </iframe>
       </div>
 
@@ -1375,29 +1414,67 @@
   <!-- COOKIE BANNER -->
   <div id="cookie-banner" role="dialog" aria-label="Consenso cookie" style="display:none">
     <p>
-      Questo sito utilizza cookie tecnici necessari al funzionamento e cookie di terze parti (Google Maps).
-      Leggi la nostra <a href="cookie.html">Cookie Policy</a> e la <a href="privacy.html">Privacy Policy</a>.
+      Questo sito usa <strong>cookie tecnici</strong> necessari al funzionamento e, nella sezione Contatti,
+      un'integrazione con <strong>Google Maps</strong> che può impostare cookie di terze parti.
+      Salvando la scelta verrà memorizzato un cookie <em>cookie_consent</em> per 12 mesi.
+      <a href="cookie.html">Cookie Policy</a> · <a href="privacy.html">Privacy Policy</a>
     </p>
     <div class="cookie-btns">
-      <button id="cookie-reject">Solo necessari</button>
-      <button id="cookie-accept">Accetta tutto</button>
+      <button id="cookie-reject">Rifiuta cookie di terze parti</button>
+      <button id="cookie-accept">Accetta tutti i cookie</button>
     </div>
   </div>
 
   <script>
     (function () {
-      const banner = document.getElementById('cookie-banner');
-      if (!localStorage.getItem('cookie_consent')) {
-        banner.style.display = 'flex';
+      const banner      = document.getElementById('cookie-banner');
+      const mapIframe   = document.getElementById('mappa-iframe');
+      const mapHolder   = document.getElementById('mappa-placeholder');
+
+      function getConsent() {
+        try { return localStorage.getItem('cookie_consent'); }
+        catch (e) { return null; }
       }
+      function setConsent(val) {
+        try { localStorage.setItem('cookie_consent', val); } catch (e) {}
+      }
+
+      function loadMap() {
+        if (mapIframe && !mapIframe.src) {
+          mapIframe.src = mapIframe.dataset.src;
+        }
+        if (mapIframe)  mapIframe.style.display = 'block';
+        if (mapHolder)  mapHolder.style.display  = 'none';
+      }
+
+      // Stato iniziale
+      const consent = getConsent();
+      if (!consent) {
+        banner.style.display = 'flex';
+      } else if (consent === 'all') {
+        loadMap();
+      }
+
+      // Accetta tutto
       document.getElementById('cookie-accept').addEventListener('click', () => {
-        localStorage.setItem('cookie_consent', 'all');
+        setConsent('all');
         banner.style.display = 'none';
+        loadMap();
       });
+
+      // Rifiuta terze parti
       document.getElementById('cookie-reject').addEventListener('click', () => {
-        localStorage.setItem('cookie_consent', 'necessary');
+        setConsent('necessary');
         banner.style.display = 'none';
       });
+
+      // Bottone "Accetta e visualizza la mappa" dentro il placeholder
+      if (mapHolder) {
+        document.getElementById('mappa-accetta').addEventListener('click', () => {
+          setConsent('all');
+          loadMap();
+        });
+      }
     })();
   </script>
 
