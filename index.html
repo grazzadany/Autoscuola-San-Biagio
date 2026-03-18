@@ -1385,11 +1385,11 @@
       }
 
       function loadMap() {
-        if (mapIframe && !mapIframe.src) {
+        if (mapIframe) {
           mapIframe.src = mapIframe.dataset.src;
+          mapIframe.style.display = 'block';
         }
-        if (mapIframe)  mapIframe.style.display = 'block';
-        if (mapHolder)  mapHolder.style.display  = 'none';
+        if (mapHolder) mapHolder.style.display = 'none';
       }
 
       function showBanner() {
