@@ -66,6 +66,7 @@
       --grigio:   #e2e7ee;
       --testo:    #1a2030;
       --bianco:   #ffffff;
+      --tortora:  #ede8e1;
     }
 
     /* ── Navbar ── */
@@ -114,7 +115,7 @@
       100% { background-position: 0% 50%; }
     }
     .hero {
-      background: linear-gradient(135deg, #0d1b2a, #1a3a7a, #17b8c8, #0d1b2a, #1a3a7a);
+      background: linear-gradient(135deg, #0d1b2a, #1a3a7a, #0d3060, #17b8c8, #0d1b2a, #1e2a50);
       background-size: 300% 300%;
       animation: gradientShift 8s ease infinite;
       color: var(--bianco);
@@ -186,13 +187,13 @@
     }
     .divider {
       width: 50px; height: 4px;
-      background: var(--rosso);
+      background: linear-gradient(90deg, var(--rosso), var(--giallo), var(--verde), var(--ciano));
       border-radius: 4px;
       margin: .6rem auto 1.2rem;
     }
 
     /* ── Servizi ── */
-    #servizi { background: var(--bianco); }
+    #servizi { background: var(--tortora); }
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -238,7 +239,7 @@
       counter-reset: step;
     }
     .step {
-      background: var(--bianco);
+      background: var(--tortora);
       border-radius: 10px;
       padding: 1.8rem 1.4rem;
       text-align: center;
@@ -258,23 +259,6 @@
     }
     .step h3 { color: var(--blu-sc); font-size: 1rem; margin-bottom: .4rem; }
     .step p  { color: #5a6a7e; font-size: .87rem; line-height: 1.6; }
-
-    /* ── Requisiti ── */
-    #requisiti { background: var(--bianco); }
-    .req-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.4rem;
-    }
-    .req-box {
-      border-left: 5px solid var(--blu);
-      background: var(--grigio-ch);
-      border-radius: 0 8px 8px 0;
-      padding: 1.4rem 1.2rem;
-    }
-    .req-box h3 { color: var(--blu-sc); font-size: 1rem; margin-bottom: .7rem; }
-    .req-box ul { padding-left: 1.1rem; color: #3a4a5e; font-size: .88rem; }
-    .req-box ul li { margin-bottom: .4rem; line-height: 1.5; }
 
     /* ── Documenti per patente ── */
     #documenti-patente { background: var(--grigio-ch); }
@@ -305,7 +289,7 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
     .doc-panel {
-      background: var(--bianco);
+      background: var(--tortora);
       border-radius: 10px;
       padding: 2rem;
       box-shadow: 0 2px 12px rgba(0,0,0,.07);
@@ -343,7 +327,7 @@
     #orari { background: var(--blu-sc); color: var(--bianco); }
     #orari .section-title { color: var(--bianco); }
     #orari .section-sub   { color: #a0b8d8; }
-    #orari .divider       { background: var(--giallo); }
+    #orari .divider       { background: linear-gradient(90deg, var(--rosso), var(--giallo), var(--verde), var(--ciano)); }
     .orari-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -376,7 +360,7 @@
       gap: 1.4rem;
     }
     .contatto-card {
-      background: var(--bianco);
+      background: var(--tortora);
       border-radius: 10px;
       padding: 1.8rem 1.4rem;
       text-align: center;
@@ -414,7 +398,7 @@
 
 
     /* ── Recensioni ── */
-    #recensioni { background: var(--bianco); }
+    #recensioni { background: var(--tortora); }
     .recensioni-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -521,7 +505,7 @@
     #cookie-reject { background: transparent; color: var(--bianco); border: 1.5px solid var(--bianco) !important; }
 
     /* ── Form contatto ── */
-    #form-contatto { background: var(--bianco); }
+    #form-contatto { background: var(--tortora); }
     .form-wrap {
       background: var(--grigio-ch);
       border: 1px solid var(--grigio);
@@ -593,9 +577,188 @@
       margin-bottom: 1.2rem;
       font-weight: 600;
     }
+    .form-error {
+      display: none;
+      background: #fff0ee;
+      border: 1.5px solid var(--rosso);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      color: #b93220;
+      font-size: .93rem;
+      margin-bottom: 1.2rem;
+      font-weight: 600;
+    }
+    .btn:disabled {
+      opacity: .65;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
     @media (max-width: 600px) {
       .form-row { grid-template-columns: 1fr; }
       .form-wrap { padding: 1.4rem 1rem; }
+    }
+
+    /* ── Accenti colore logo ── */
+
+    /* Card servizi: icone e badge seguono i 4 colori del logo */
+    .card:nth-child(1) .card-icon,
+    .card:nth-child(5) .card-icon { background: var(--rosso); }
+    .card:nth-child(2) .card-icon,
+    .card:nth-child(7) .card-icon { background: var(--giallo); color: var(--testo); }
+    .card:nth-child(3) .card-icon,
+    .card:nth-child(6) .card-icon { background: var(--ciano); }
+    .card:nth-child(4) .card-icon,
+    .card:nth-child(8) .card-icon { background: var(--verde); }
+
+    .card:nth-child(1) .badge-patente,
+    .card:nth-child(5) .badge-patente { background: var(--rosso); }
+    .card:nth-child(2) .badge-patente,
+    .card:nth-child(7) .badge-patente { background: var(--giallo); color: var(--testo); }
+    .card:nth-child(3) .badge-patente,
+    .card:nth-child(6) .badge-patente { background: var(--ciano); }
+    .card:nth-child(4) .badge-patente,
+    .card:nth-child(8) .badge-patente { background: var(--verde); }
+
+    /* Steps: un colore del logo per ogni fase */
+    .step:nth-child(1) { border-top-color: var(--rosso); }
+    .step:nth-child(2) { border-top-color: var(--giallo); }
+    .step:nth-child(3) { border-top-color: var(--verde); }
+    .step:nth-child(4) { border-top-color: var(--ciano); }
+
+    .step:nth-child(1) .step-num { background: var(--rosso); }
+    .step:nth-child(2) .step-num { background: var(--giallo); color: var(--testo); }
+    .step:nth-child(3) .step-num { background: var(--verde); }
+    .step:nth-child(4) .step-num { background: var(--ciano); }
+
+    /* Contatti: icone colorate */
+    .contatto-card:nth-child(1) .contatto-icon { background: var(--rosso); }
+    .contatto-card:nth-child(2) .contatto-icon { background: var(--verde); }
+    .contatto-card:nth-child(3) .contatto-icon { background: var(--ciano); }
+
+    /* Hover colorato sulle card servizi */
+    .card:nth-child(1):hover,
+    .card:nth-child(5):hover { box-shadow: 0 8px 28px rgba(232,85,58,.22); }
+    .card:nth-child(2):hover,
+    .card:nth-child(7):hover { box-shadow: 0 8px 28px rgba(245,197,24,.28); }
+    .card:nth-child(3):hover,
+    .card:nth-child(6):hover { box-shadow: 0 8px 28px rgba(23,184,200,.22); }
+    .card:nth-child(4):hover  { box-shadow: 0 8px 28px rgba(76,175,80,.22); }
+
+    /* Hover colorato sugli step */
+    .step { transition: box-shadow .2s, transform .2s; }
+    .step:hover { transform: translateY(-4px); }
+    .step:nth-child(1):hover { box-shadow: 0 8px 24px rgba(232,85,58,.2); }
+    .step:nth-child(2):hover { box-shadow: 0 8px 24px rgba(245,197,24,.28); }
+    .step:nth-child(3):hover { box-shadow: 0 8px 24px rgba(76,175,80,.2); }
+    .step:nth-child(4):hover { box-shadow: 0 8px 24px rgba(23,184,200,.2); }
+
+    /* ── News ── */
+    #news { background: var(--grigio-ch); padding: 4rem 0; }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2rem;
+    }
+    .news-card {
+      background: var(--bianco);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      border-left: 4px solid var(--blu);
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+      transition: transform .2s, box-shadow .2s;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+    .news-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(26,58,122,.15);
+    }
+    .news-card:nth-child(2) { border-left-color: var(--rosso); }
+    .news-card:nth-child(3) { border-left-color: var(--giallo); }
+    .news-card:nth-child(4) { border-left-color: var(--ciano); }
+    .news-card:nth-child(5) { border-left-color: var(--verde); }
+    .news-card:nth-child(6) { border-left-color: var(--rosso); }
+    .news-data {
+      font-size: .78rem;
+      color: #8a9ab8;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .news-titolo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--testo);
+      line-height: 1.4;
+    }
+    .news-titolo a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .news-titolo a:hover { color: var(--blu); text-decoration: underline; }
+    .news-desc {
+      font-size: .88rem;
+      color: #5a6a7e;
+      line-height: 1.55;
+      flex: 1;
+    }
+    .news-fonte {
+      font-size: .75rem;
+      color: #a0b0c8;
+      margin-top: .3rem;
+    }
+    .news-loading {
+      text-align: center;
+      color: #8a9ab8;
+      padding: 2rem 0;
+      font-size: .95rem;
+    }
+    .news-errore {
+      text-align: center;
+      color: var(--rosso);
+      padding: 1.5rem 0;
+      font-size: .92rem;
+    }
+    @media (max-width: 600px) {
+      .news-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Auto screensaver ── */
+    .car-screensaver {
+      position: fixed;
+      bottom: 18px;
+      left: 0;
+      z-index: 998;
+      pointer-events: none;
+      user-select: none;
+      font-size: 2.4rem;
+      line-height: 1;
+      will-change: transform;
+    }
+    @keyframes car-passa {
+      0%   { transform: translateX(-80px)              translateY(0px);  }
+      20%  { transform: translateX(20vw)               translateY(-4px); }
+      40%  { transform: translateX(40vw)               translateY(0px);  }
+      60%  { transform: translateX(60vw)               translateY(-3px); }
+      80%  { transform: translateX(80vw)               translateY(0px);  }
+      100% { transform: translateX(calc(100vw + 80px)) translateY(0px);  }
+    }
+    .car-screensaver.in-moto {
+      animation: car-passa 5.5s linear forwards;
+    }
+
+    /* ── Animazioni scroll ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
     }
 
     /* ── Footer ── */
@@ -680,10 +843,10 @@
     <ul id="nav-menu">
       <li><a href="#servizi">Servizi</a></li>
       <li><a href="#come-funziona">Come funziona</a></li>
-      <li><a href="#requisiti">Requisiti</a></li>
       <li><a href="#documenti-patente">Documenti</a></li>
       <li><a href="#orari">Orari</a></li>
       <li><a href="#recensioni">Recensioni</a></li>
+      <li><a href="#news">News</a></li>
       <li><a href="#form-contatto">Scrivici</a></li>
       <li><a href="#contatti">Contatti</a></li>
     </ul>
@@ -706,51 +869,58 @@
 
         <div class="card">
           <div class="badge-patente">Patente AM</div>
-          <div class="card-icon">&#x1F6F5;</div>
+          <div class="card-icon" aria-hidden="true">&#x1F6F5;</div>
           <h3>Ciclomotore / Scooter 50</h3>
           <p>Conseguibile dai 14 anni. Permette di guidare ciclomotori fino a 50 cc su tutto il territorio nazionale.</p>
         </div>
 
         <div class="card">
           <div class="badge-patente">Patente A1 / A2 / A</div>
-          <div class="card-icon">&#x1F3CD;</div>
+          <div class="card-icon" aria-hidden="true">&#x1F3CD;</div>
           <h3>Moto</h3>
           <p>Tre livelli in base all'eta e all'esperienza. Dalla moto leggera fino alle moto di grossa cilindrata senza limiti.</p>
         </div>
 
         <div class="card">
           <div class="badge-patente">Patente B</div>
-          <div class="card-icon">&#x1F697;</div>
+          <div class="card-icon" aria-hidden="true">&#x1F697;</div>
           <h3>Autovettura</h3>
           <p>La patente piu richiesta. Conseguibile dai 18 anni (17 anni con accompagnatore abilitato - patente B1 anticipata).</p>
         </div>
 
         <div class="card">
           <div class="badge-patente">Patente BS</div>
-          <div class="card-icon">&#x1F697;</div>
+          <div class="card-icon" aria-hidden="true">&#x1F697;</div>
           <h3>Auto con adattamenti</h3>
           <p>Per chi necessita di adattamenti al veicolo. Istruttori specializzati e auto attrezzata per la guida con disabilità motoria.</p>
         </div>
 
         <div class="card">
           <div class="badge-patente">Patente C / CE</div>
-          <div class="card-icon">&#x1F69A;</div>
+          <div class="card-icon" aria-hidden="true">&#x1F69A;</div>
           <h3>Autocarro / Autoarticolato</h3>
           <p>Per chi vuole lavorare nel trasporto merci. Effettuiamo corsi per la Carta di Qualificazione del Conducente (CQC).</p>
         </div>
 
         <div class="card">
           <div class="badge-patente">Patente D / DE</div>
-          <div class="card-icon">&#x1F68C;</div>
+          <div class="card-icon" aria-hidden="true">&#x1F68C;</div>
           <h3>Autobus</h3>
           <p>Per il trasporto di persone. Corsi completi con preparazione alla CQC Persone obbligatoria per uso professionale.</p>
         </div>
 
         <div class="card">
           <div class="badge-patente">Revisione / Recupero punti</div>
-          <div class="card-icon">&#x1F4CB;</div>
+          <div class="card-icon" aria-hidden="true">&#x1F4CB;</div>
           <h3>Corsi speciali</h3>
           <p>Corso di recupero punti patente, revisione della patente e guida accompagnata.</p>
+        </div>
+
+        <div class="card">
+          <div class="badge-patente">Rinnovo patente</div>
+          <div class="card-icon" aria-hidden="true">&#x1F501;</div>
+          <h3>Rinnovo patente</h3>
+          <p>Rinnovo patente con il nostro medico, ogni lunedì. Visita medica, pratiche amministrative e disbrigo documentazione tutto in sede.</p>
         </div>
 
       </div>
@@ -780,7 +950,7 @@
         <div class="step">
           <div class="step-num">3</div>
           <h3>Esame teorico</h3>
-          <p>Frequenta il corso con i nostri istruttori o studia online con il nostro materiale didattico. Quiz al computer in Motorizzazione.</p>
+          <p>Frequenta il corso con i nostri insegnanti o studia online con il nostro materiale didattico. Quiz al computer in Motorizzazione.</p>
         </div>
 
         <div class="step">
@@ -793,52 +963,7 @@
     </div>
   </section>
 
-  <!-- REQUISITI -->
-  <section id="requisiti">
-    <div class="container">
-      <h2 class="section-title">Documenti e requisiti</h2>
-      <div class="divider"></div>
-      <p class="section-sub">Cosa portare al momento dell'iscrizione.</p>
-      <div class="req-grid">
 
-        <div class="req-box">
-          <h3>Documenti richiesti</h3>
-          <ul>
-            <li>Carta d'identita valida o passaporto</li>
-            <li>Codice fiscale (tessera sanitaria)</li>
-            <li>2 foto tessera recenti</li>
-            <li>Permesso di soggiorno (per cittadini extra-UE)</li>
-            <li>Eventuale patente gia in possesso</li>
-          </ul>
-        </div>
-
-        <div class="req-box">
-          <h3>Eta minima per categoria</h3>
-          <ul>
-            <li><strong>AM</strong> - 14 anni</li>
-            <li><strong>A1</strong> - 16 anni</li>
-            <li><strong>A2</strong> - 18 anni</li>
-            <li><strong>A</strong> - 24 anni (o 21 con A2 da 2 anni)</li>
-            <li><strong>B</strong> - 18 anni (17 con guida accompagnata)</li>
-            <li><strong>C / D</strong> - 18 anni (C) / 21 anni (D)</li>
-          </ul>
-        </div>
-
-        <div class="req-box">
-          <h3>Costi indicativi</h3>
-          <ul>
-            <li>Diritti di segreteria e pratiche</li>
-            <li>Quota corso teorico</li>
-            <li>Lezioni di guida (pacchetti disponibili)</li>
-            <li>Diritti di esame Motorizzazione</li>
-            <li>Visita medica</li>
-          </ul>
-          <p style="margin-top:.7rem;font-size:.82rem;color:#7a8a9e;">Contattaci per un preventivo personalizzato senza impegno.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <!-- DOCUMENTI PER PATENTE -->
   <section id="documenti-patente">
@@ -853,7 +978,7 @@
         <button class="tab-btn" data-tab="a2">Patente A2</button>
         <button class="tab-btn" data-tab="a">Patente A</button>
         <button class="tab-btn" data-tab="b">Patente B</button>
-        <button class="tab-btn" data-tab="b-acc">Patente B (accompagnata)</button>
+        <button class="tab-btn" data-tab="b-acc">Guida accompagnata</button>
         <button class="tab-btn" data-tab="c">Patente C / CE</button>
         <button class="tab-btn" data-tab="d">Patente D / DE</button>
       </div>
@@ -873,7 +998,7 @@
           <div class="doc-col">
             <h4>Idoneita e consensi</h4>
             <ul>
-              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico curante</li>
               <li>Consenso di entrambi i genitori (se minorenne, eta minima 14 anni)</li>
               <li>Documento d'identita del genitore firmatario</li>
             </ul>
@@ -899,9 +1024,9 @@
           <div class="doc-col">
             <h4>Idoneita e altro</h4>
             <ul>
-              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico curante</li>
               <li>Consenso di entrambi i genitori (se minorenne, eta minima 16 anni)</li>
-              <li>Copia patente AM se gia in possesso (per esonero parte teorica)</li>
+              <li>Copia patente AM se gia in possesso</li>
             </ul>
           </div>
           <div class="doc-nota">
@@ -925,7 +1050,7 @@
           <div class="doc-col">
             <h4>Idoneita e altro</h4>
             <ul>
-              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico curante</li>
               <li>Copia patente A1 se gia in possesso (riduzione prove d'esame)</li>
             </ul>
           </div>
@@ -950,7 +1075,7 @@
           <div class="doc-col">
             <h4>Idoneita e altro</h4>
             <ul>
-              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico curante (se non in possesso di altra patente)</li>
               <li>Copia patente A2 (obbligatoria per accesso a 21 anni con 2 anni di A2)</li>
             </ul>
           </div>
@@ -975,7 +1100,7 @@
           <div class="doc-col">
             <h4>Idoneita e altro</h4>
             <ul>
-              <li>Certificato di idoneita psicofisica rilasciato dal medico abilitato</li>
+              <li>Certificato di idoneita psicofisica rilasciato dal medico curante</li>
               <li>Copia patente AM o A1/A2 se gia in possesso (esoneri parziali)</li>
             </ul>
           </div>
@@ -993,8 +1118,6 @@
             <ul>
               <li>Documento d'identita valido</li>
               <li>Codice fiscale / tessera sanitaria</li>
-              <li>2 foto tessera recenti su sfondo bianco</li>
-              <li>Certificato di idoneita psicofisica</li>
               <li>Consenso scritto di entrambi i genitori</li>
             </ul>
           </div>
@@ -1003,9 +1126,6 @@
             <ul>
               <li>Documento d'identita valido</li>
               <li>Patente B in corso di validita, conseguita da almeno 10 anni</li>
-              <li>Eta compresa tra 30 e 70 anni</li>
-              <li>Nessuna sospensione della patente negli ultimi 5 anni</li>
-              <li>Foglio rosa del candidato da esibire durante la guida</li>
             </ul>
           </div>
           <div class="doc-nota">
@@ -1030,8 +1150,8 @@
           <div class="doc-col">
             <h4>Idoneita e qualifiche</h4>
             <ul>
-              <li>Visita medica speciale presso commissione medica locale (non basta il medico di base)</li>
-              <li>Attestato CQC Merci (per uso professionale e trasporto per conto terzi)</li>
+              <li>Visita medica</li>
+
               <li>Per patente CE: copia patente C gia conseguita</li>
             </ul>
           </div>
@@ -1057,10 +1177,10 @@
           <div class="doc-col">
             <h4>Idoneita e qualifiche</h4>
             <ul>
-              <li>Visita medica speciale presso commissione medica locale</li>
-              <li>Attestato CQC Persone (obbligatorio per uso professionale)</li>
+              <li>Visita medica presso il nostro medico</li>
+
               <li>Per patente DE: copia patente D gia conseguita</li>
-              <li>Certificato penale del casellario giudiziale (in alcuni casi)</li>
+
             </ul>
           </div>
           <div class="doc-nota">
@@ -1089,15 +1209,15 @@
 
         <div class="orari-box">
           <h3>Lezioni teoriche</h3>
-          <div class="orario-row"><span class="giorno">Lunedi / Martedi / Giovedi</span><span class="ora">15:00 e 19:00</span></div>
-          <div class="orario-row"><span class="giorno">Mercoledi / Venerdi / Sabato</span><span class="ora chiuso">Nessuna lezione</span></div>
+          <div class="orario-row"><span class="giorno">Lunedi / Mercoledi / Venerdi</span><span class="ora">18:45</span></div>
+          <div class="orario-row"><span class="giorno">Martedi / Giovedi</span><span class="ora">09:30 e 15:00</span></div>
           <div class="orario-row"><span class="giorno">Domenica</span><span class="ora chiuso">Chiuso</span></div>
         </div>
 
         <div class="orari-box">
           <h3>Lezioni di guida</h3>
-          <div class="orario-row"><span class="giorno">Lunedi - Sabato</span><span class="ora">07:00 - 20:00</span></div>
-          <div class="orario-row"><span class="giorno">Domenica</span><span class="ora">Su appuntamento</span></div>
+          <div class="orario-row"><span class="giorno">Lunedi - Venerdi</span><span class="ora">09:00 - 12:00 / 14:30 - 20:00</span></div>
+          <div class="orario-row"><span class="giorno">Sabato</span><span class="ora">09:00 - 12:00</span></div>
           <div class="orario-row"><span class="giorno">Festivi</span><span class="ora chiuso">Chiuso</span></div>
         </div>
 
@@ -1179,7 +1299,13 @@
         <div class="form-success" id="form-success">
           &#10003; Messaggio inviato! Ti risponderemo al più presto.
         </div>
-        <form id="contatto-form" novalidate>
+        <div class="form-error" id="form-error"></div>
+        <form id="contatto-form">
+          <!-- Web3Forms: sostituisci il value con la tua chiave da web3forms.com -->
+          <input type="hidden" name="access_key" value="INSERISCI_QUI_LA_TUA_CHIAVE" />
+          <input type="hidden" name="subject" value="Nuova richiesta dal sito – Autoscuola San Biagio" />
+          <input type="hidden" name="from_name" value="Sito Autoscuola San Biagio" />
+          <input type="hidden" name="replyto" id="h-replyto" value="" />
           <div class="form-row">
             <div class="form-group">
               <label for="f-nome">Nome <span style="color:var(--rosso)">*</span></label>
@@ -1214,7 +1340,7 @@
           <div class="form-privacy">
             <input type="checkbox" id="f-privacy" name="privacy" required />
             <label for="f-privacy">
-              Ho letto e accetto la <a href="privacy.html" target="_blank">Privacy Policy</a>.
+              Ho letto e accetto la <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
               I miei dati verranno utilizzati esclusivamente per rispondere alla mia richiesta.
             </label>
           </div>
@@ -1222,6 +1348,18 @@
             Invia messaggio
           </button>
         </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS -->
+  <section id="news">
+    <div class="container">
+      <h2 class="section-title">News &amp; Aggiornamenti</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Le ultime notizie su patenti, codice della strada e normative — aggiornate automaticamente da <a href="https://www.patente.it" target="_blank" rel="noopener" style="color:var(--blu);text-decoration:none;font-weight:600;">patente.it</a>.</p>
+      <div id="news-grid" class="news-grid">
+        <p class="news-loading">Caricamento notizie in corso...</p>
       </div>
     </div>
   </section>
@@ -1307,42 +1445,106 @@
     /* ── Form contatto ── */
     const form = document.getElementById('contatto-form');
     if (form) {
-      form.addEventListener('submit', function(e) {
+      form.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const nome     = document.getElementById('f-nome').value.trim();
-        const cognome  = document.getElementById('f-cognome').value.trim();
-        const email    = document.getElementById('f-email').value.trim();
+
+        const nome      = document.getElementById('f-nome').value.trim();
+        const cognome   = document.getElementById('f-cognome').value.trim();
+        const email     = document.getElementById('f-email').value.trim();
         const messaggio = document.getElementById('f-messaggio').value.trim();
-        const privacy  = document.getElementById('f-privacy').checked;
+        const privacy   = document.getElementById('f-privacy').checked;
+        const btn       = form.querySelector('button[type="submit"]');
+        const successEl = document.getElementById('form-success');
+        const errorEl   = document.getElementById('form-error');
+
+        successEl.style.display = 'none';
+        errorEl.style.display   = 'none';
 
         if (!nome || !cognome || !email || !messaggio) {
-          alert('Per favore compila tutti i campi obbligatori (*).');
-          return;
-        }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-          alert('Inserisci un indirizzo email valido.');
+          errorEl.textContent = 'Per favore compila tutti i campi obbligatori (*).';
+          errorEl.style.display = 'block';
           return;
         }
         if (!privacy) {
-          alert('Devi accettare la Privacy Policy per inviare il messaggio.');
+          errorEl.textContent = 'Devi accettare la Privacy Policy per inviare il messaggio.';
+          errorEl.style.display = 'block';
           return;
         }
 
-        const patente = document.getElementById('f-patente').value;
-        const subject = encodeURIComponent('Richiesta dal sito – ' + nome + ' ' + cognome);
-        const body    = encodeURIComponent(
-          'Nome: ' + nome + ' ' + cognome + '\n' +
-          'Email: ' + email + '\n' +
-          (patente ? 'Patente di interesse: ' + patente + '\n' : '') +
-          '\nMessaggio:\n' + messaggio
-        );
-        window.location.href = 'mailto:autoscuolasanbiagio@libero.it?subject=' + subject + '&body=' + body;
+        // Imposta reply-to con l'email del mittente
+        document.getElementById('h-replyto').value = email;
 
-        document.getElementById('form-success').style.display = 'block';
-        form.reset();
-        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        btn.disabled    = true;
+        btn.textContent = 'Invio in corso…';
+
+        try {
+          const res  = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            body: new FormData(form)
+          });
+          const json = await res.json();
+
+          if (json.success) {
+            successEl.style.display = 'block';
+            form.reset();
+            form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            throw new Error(json.message || 'Errore sconosciuto');
+          }
+        } catch (err) {
+          errorEl.textContent = 'Errore durante l\'invio. Riprova oppure scrivici direttamente a autoscuolasanbiagio@libero.it';
+          errorEl.style.display = 'block';
+        } finally {
+          btn.disabled    = false;
+          btn.textContent = 'Invia messaggio';
+        }
       });
     }
+
+    /* ── Auto screensaver ── */
+    (function () {
+      const car = document.createElement('div');
+      car.className = 'car-screensaver';
+      car.setAttribute('aria-hidden', 'true');
+      car.textContent = '🚗';
+      document.body.appendChild(car);
+
+      function passa() {
+        car.classList.remove('in-moto');
+        void car.offsetWidth; // forza reflow per riavviare l'animazione
+        car.classList.add('in-moto');
+      }
+
+      setTimeout(passa, 3000);   // prima passata dopo 3s
+      setInterval(passa, 30000); // poi ogni 30s
+    })();
+
+    /* ── Animazioni scroll ── */
+    (function () {
+      const gridEls = document.querySelectorAll('.card, .step, .recensione-card, .contatto-card');
+      const textEls = document.querySelectorAll('.section-title, .divider, .section-sub');
+
+      gridEls.forEach(el => el.classList.add('fade-in'));
+      textEls.forEach(el => el.classList.add('fade-in'));
+
+      // Stagger ritardato per elementi dentro una griglia
+      document.querySelectorAll('.cards, .steps, .recensioni-grid, .contatti-grid').forEach(grid => {
+        grid.querySelectorAll('.fade-in').forEach((el, i) => {
+          el.style.transitionDelay = (i * 80) + 'ms';
+        });
+      });
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+    })();
 
     /* ── Tab patenti ── */
     const tabBtns = document.querySelectorAll('.tab-btn');
@@ -1438,6 +1640,79 @@
           loadMap();
         });
       }
+    })();
+  </script>
+
+  <!-- NEWS: caricamento RSS da patente.it -->
+  <script>
+    (function() {
+      const FEED_URL = 'http://www.patente.it/upload/rss/rss2.0.xml';
+      const PROXY    = 'https://api.allorigins.win/get?url=';
+      const MAX_NEWS = 6;
+      const grid     = document.getElementById('news-grid');
+      if (!grid) return;
+
+      function formatData(dateStr) {
+        if (!dateStr) return '';
+        const d = new Date(dateStr);
+        if (isNaN(d)) return dateStr;
+        return d.toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
+      }
+
+      function stripHtml(html) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html || '';
+        return tmp.textContent || tmp.innerText || '';
+      }
+
+      function truncate(str, max) {
+        if (!str || str.length <= max) return str;
+        return str.slice(0, max).trimEnd() + '…';
+      }
+
+      function renderNews(items) {
+        if (!items.length) {
+          grid.innerHTML = '<p class="news-errore">Nessuna notizia disponibile al momento.</p>';
+          return;
+        }
+        grid.innerHTML = items.slice(0, MAX_NEWS).map(item => `
+          <div class="news-card fade-in">
+            <div class="news-data">${formatData(item.date)}</div>
+            <div class="news-titolo"><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></div>
+            <div class="news-desc">${truncate(stripHtml(item.desc), 160)}</div>
+            <div class="news-fonte">Fonte: patente.it</div>
+          </div>
+        `).join('');
+        // Attiva animazioni scroll sulle card appena create
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        grid.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+      }
+
+      function getText(el, tag) {
+        return el.getElementsByTagName(tag)[0]?.textContent?.trim() || '';
+      }
+
+      fetch(PROXY + encodeURIComponent(FEED_URL))
+        .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+        .then(data => {
+          const parser = new DOMParser();
+          // Rimuove la dichiarazione XML per evitare conflitti di encoding nel browser
+          const xmlStr = (data.contents || '').replace(/<\?xml[^?]*\?>/i, '');
+          const xml = parser.parseFromString(xmlStr, 'application/xml');
+          if (xml.querySelector('parsererror')) throw new Error('XML non valido');
+          const items = Array.from(xml.getElementsByTagName('item')).map(el => ({
+            title: getText(el, 'title'),
+            link:  getText(el, 'link') || getText(el, 'guid') || '#',
+            desc:  getText(el, 'description'),
+            date:  getText(el, 'pubDate')
+          }));
+          renderNews(items);
+        })
+        .catch(() => {
+          grid.innerHTML = '<p class="news-errore">Impossibile caricare le notizie. Riprova più tardi.</p>';
+        });
     })();
   </script>
 
