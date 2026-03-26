@@ -15,16 +15,18 @@ jobs:
       - name: Installa lftp
         run: sudo apt-get install -y lftp
 
-      - name: Mostra cartelle FTP disponibili
+      - name: Deploy su Aruba
+        env:
+          FTP_USER: ${{ secrets.FTP_USERNAME }}
+          FTP_PASS: ${{ secrets.FTP_PASSWORD }}
         run: |
-          lftp -e "set ssl:verify-certificate no; set ftp:passive-mode on; open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.autoscuolasanbiagio.com; ls; bye" 2>&1
-
-      - name: Upload index.html su Aruba
-        run: |
+          echo "machine ftp.autoscuolasanbiagio.com login $FTP_USER password $FTP_PASS" > ~/.netrc
+          chmod 600 ~/.netrc
           lftp -e "
             set ssl:verify-certificate no;
             set ftp:passive-mode on;
-            open -u ${{ secrets.FTP_USERNAME }},${{ secrets.FTP_PASSWORD }} ftp.autoscuolasanbiagio.com;
-            put -O ./ index.html;
+            open ftp.autoscuolasanbiagio.com;
+            ls;
+            put index.html;
             bye
-          " 2>&1
+          "
