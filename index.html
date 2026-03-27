@@ -1306,6 +1306,7 @@
           <input type="hidden" name="subject" value="Nuova richiesta dal sito – Autoscuola San Biagio" />
           <input type="hidden" name="from_name" value="Sito Autoscuola San Biagio" />
           <input type="hidden" name="replyto" id="h-replyto" value="" />
+          <input type="checkbox" name="botcheck" style="display:none" />
           <div class="form-row">
             <div class="form-group">
               <label for="f-nome">Nome <span style="color:var(--rosso)">*</span></label>
@@ -1492,7 +1493,7 @@
             throw new Error(json.message || 'Errore sconosciuto');
           }
         } catch (err) {
-          errorEl.textContent = 'Errore: ' + (err.message || 'Impossibile inviare. Scrivici a autoscuolasanbiagio@libero.it');
+          errorEl.textContent = 'Errore durante l\'invio. Riprova oppure scrivici direttamente a autoscuolasanbiagio@libero.it';
           errorEl.style.display = 'block';
         } finally {
           btn.disabled    = false;
