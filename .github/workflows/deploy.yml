@@ -26,7 +26,7 @@ jobs:
             set ssl:verify-certificate no;
             set ftp:passive-mode on;
             open ftp.autoscuolasanbiagio.com;
-            ls;
+            cd www.autoscuolasanbiagio.com;
             put index.html;
             bye
           "
