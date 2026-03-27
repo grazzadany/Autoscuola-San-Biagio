@@ -27,6 +27,7 @@ jobs:
             set ftp:passive-mode on;
             open ftp.autoscuolasanbiagio.com;
             cd www.autoscuolasanbiagio.com;
+            ls;
             put index.html;
             bye
           "
