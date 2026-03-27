@@ -1646,10 +1646,10 @@
   <!-- NEWS: caricamento RSS da patente.it -->
   <script>
     (function() {
-      const FEED_URL = 'http://www.patente.it/upload/rss/rss2.0.xml';
-      const PROXY    = 'https://api.allorigins.win/get?url=';
-      const MAX_NEWS = 6;
-      const grid     = document.getElementById('news-grid');
+      const FEED_URL  = 'https://www.patente.it/upload/rss/rss2.0.xml';
+      const API_URL   = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(FEED_URL) + '&count=6';
+      const MAX_NEWS  = 6;
+      const grid      = document.getElementById('news-grid');
       if (!grid) return;
 
       function formatData(dateStr) {
@@ -1677,38 +1677,23 @@
         }
         grid.innerHTML = items.slice(0, MAX_NEWS).map(item => `
           <div class="news-card fade-in">
-            <div class="news-data">${formatData(item.date)}</div>
+            <div class="news-data">${formatData(item.pubDate || item.date)}</div>
             <div class="news-titolo"><a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a></div>
-            <div class="news-desc">${truncate(stripHtml(item.desc), 160)}</div>
+            <div class="news-desc">${truncate(stripHtml(item.description || item.content || ''), 160)}</div>
             <div class="news-fonte">Fonte: patente.it</div>
           </div>
         `).join('');
-        // Attiva animazioni scroll sulle card appena create
         const io = new IntersectionObserver(entries => {
           entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
         }, { threshold: 0.1 });
         grid.querySelectorAll('.fade-in').forEach(el => io.observe(el));
       }
 
-      function getText(el, tag) {
-        return el.getElementsByTagName(tag)[0]?.textContent?.trim() || '';
-      }
-
-      fetch(PROXY + encodeURIComponent(FEED_URL))
+      fetch(API_URL)
         .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
         .then(data => {
-          const parser = new DOMParser();
-          // Rimuove la dichiarazione XML per evitare conflitti di encoding nel browser
-          const xmlStr = (data.contents || '').replace(/<\?xml[^?]*\?>/i, '');
-          const xml = parser.parseFromString(xmlStr, 'application/xml');
-          if (xml.querySelector('parsererror')) throw new Error('XML non valido');
-          const items = Array.from(xml.getElementsByTagName('item')).map(el => ({
-            title: getText(el, 'title'),
-            link:  getText(el, 'link') || getText(el, 'guid') || '#',
-            desc:  getText(el, 'description'),
-            date:  getText(el, 'pubDate')
-          }));
-          renderNews(items);
+          if (data.status !== 'ok' || !data.items?.length) throw new Error('Feed non valido');
+          renderNews(data.items);
         })
         .catch(() => {
           grid.innerHTML = '<p class="news-errore">Impossibile caricare le notizie. Riprova più tardi.</p>';
