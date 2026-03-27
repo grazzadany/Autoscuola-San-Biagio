@@ -1493,7 +1493,7 @@
             throw new Error(json.message || 'Errore sconosciuto');
           }
         } catch (err) {
-          errorEl.textContent = 'Errore durante l\'invio. Riprova oppure scrivici direttamente a autoscuolasanbiagio@libero.it';
+          errorEl.textContent = 'Errore: ' + err.message;
           errorEl.style.display = 'block';
         } finally {
           btn.disabled    = false;
