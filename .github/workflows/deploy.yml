@@ -25,9 +25,11 @@ jobs:
           lftp -e "
             set ssl:verify-certificate no;
             set ftp:passive-mode on;
+            set net:timeout 60;
+            set net:max-retries 3;
             open ftp.autoscuolasanbiagio.com;
             cd www.autoscuolasanbiagio.com;
-            ls;
-            put index.html;
+            put -O . $GITHUB_WORKSPACE/index.html;
+            put -O . $GITHUB_WORKSPACE/privacy.html;
             bye
           "
