@@ -22,6 +22,8 @@ jobs:
         run: |
           echo "machine ftp.autoscuolasanbiagio.com login $FTP_USER password $FTP_PASS" > ~/.netrc
           chmod 600 ~/.netrc
+          cd "$GITHUB_WORKSPACE"
+          echo "Dimensione index.html locale: $(wc -c < index.html) bytes"
           lftp -e "
             set ssl:verify-certificate no;
             set ftp:passive-mode on;
@@ -29,7 +31,8 @@ jobs:
             set net:max-retries 3;
             open ftp.autoscuolasanbiagio.com;
             cd www.autoscuolasanbiagio.com;
-            put -O . $GITHUB_WORKSPACE/index.html;
-            put -O . $GITHUB_WORKSPACE/privacy.html;
+            lcd $GITHUB_WORKSPACE;
+            put index.html;
+            put privacy.html;
             bye
           "
