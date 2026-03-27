@@ -1472,16 +1472,24 @@
           return;
         }
 
-        // Imposta reply-to con l'email del mittente
-        document.getElementById('h-replyto').value = email;
-
         btn.disabled    = true;
         btn.textContent = 'Invio in corso…';
 
         try {
           const res  = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            body: new FormData(form)
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: '68089607-730c-472c-9fd6-e63f51f75210',
+              subject:    'Nuova richiesta dal sito – Autoscuola San Biagio',
+              from_name:  'Sito Autoscuola San Biagio',
+              replyto:    email,
+              name:       nome + ' ' + cognome,
+              email:      email,
+              patente:    document.getElementById('f-patente').value,
+              message:    messaggio,
+              botcheck:   ''
+            })
           });
           const json = await res.json();
 
